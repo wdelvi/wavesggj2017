@@ -6,13 +6,14 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed_h = 0.0f;	// horizontal speed
 	public float speed_h_in_wave = -3.0f;
-	public float speed_h_in_air = -8.0f;
-	public float speed_h_on_ground = -16.0f;
+	public float speed_h_in_air = -4.0f;
+	public float speed_h_on_ground = -4.0f;
 	public float speed_h_down_add = 5.0f;
-	public float speed_h_down_add_force = 6.0f;
+	public float speed_h_down_add_force = 2.0f;
 	public float speed_h_collide = -256.0f;
 	public float speed_h_acceleration = 0.0f;
-	public float speed_h_jerk = 1.0f;
+	public float speed_h_jerk_down = 4.0f;
+	public float speed_h_jerk_up = -0.5f;
 	public float deltaTime;
 
 	public float speed_wave = 5f;	// vertical speed of wave
@@ -29,11 +30,10 @@ public class PlayerController : MonoBehaviour {
 	public bool is_collide_now;
 
 	private float speed_v;			// vertical speed
-	private float air_y = -1.0f;
-	private float ground_y = -1.0f;
 	private Rigidbody2D rb;
 
 	public bool is_down;
+	public bool is_down_before;
 
 	public bool is_force = true;
 	public float force_multiplier = 200.0f;
@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour {
 	public void Setup() {
 		is_dead = false;
 		is_down = false;
+		is_down_before = false;
 		is_in_wave = true;
 		is_in_air = false;
 		is_on_ground = false;
@@ -55,30 +56,44 @@ public class PlayerController : MonoBehaviour {
 		if (is_in_air)
 		{
 			speed_h = speed_h_in_air;
+			speed_h_acceleration += speed_h_jerk_up;
 		}
 		else if (is_on_ground)
 		{
 			speed_h = speed_h_on_ground;
+			speed_h_acceleration += speed_h_jerk_up;
+		}
+		else if (is_collide_now)
+		{
+			speed_h = speed_h_on_ground;
+			speed_h_acceleration += speed_h_jerk_up;
 		}
 		else if (is_in_wave)
 		{
 			speed_h = speed_h_in_wave;
-		}
-		if (is_down)
-		{
-			if (is_force)
+			if (is_down)
 			{
-				speed_h += speed_h_down_add_force;
+				if (is_force)
+				{
+					speed_h += speed_h_down_add_force;
+				}
+				else
+				{
+					speed_h += speed_h_down_add;
+				}
+				if (is_down_before)
+				{
+					speed_h_acceleration += speed_h_jerk_down * deltaTime;
+				}
+				else
+				{
+					speed_h_acceleration = 0.0f;
+				}
 			}
 			else
 			{
-				speed_h += speed_h_down_add;
+				speed_h_acceleration += speed_h_jerk_up * deltaTime;
 			}
-			speed_h_acceleration += speed_h_jerk * deltaTime;
-		}
-		else
-		{
-			speed_h_acceleration -= speed_h_acceleration * deltaTime;
 		}
 		speed_h += speed_h_acceleration;
 	}
@@ -125,6 +140,7 @@ public class PlayerController : MonoBehaviour {
 				transform.Translate ( Vector2.right * speed_h * deltaTime );
 			}
 		}
+		is_down_before = is_down;
 	}
 
 	public void SetDead (bool _is_dead) {

@@ -20,11 +20,11 @@ DONE
 	David H challenged by ramp up of 4 levels.
 	David H challenged by moderate obstacles (+Corey)
 	Nitiam played a few times.
+	Player can move left and right.
+	Obstacle, air, ground response satisfies us.
 
 TODO
 
-	Player can move left and right.
-	Obstacle, air, ground response satisfies us.
 	Nitiam sees first level without second overlapping.
 	Nitiam challenged but not overwhelmed.
 		David H challenged by ramp up of 6 levels.
