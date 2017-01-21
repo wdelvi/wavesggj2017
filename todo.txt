@@ -14,13 +14,13 @@ DONE
 		Press and hold to go down
 	On die, restart
 	Input feels comfortable
+	David H hits obstacle and notices penalty.
+	David H challenged by many obstacles (+Corey)
 
 TODO
 
-	David H challenged by many obstacles (+Corey)
-	David H hits obstacle and notices penalty.
 	Obstacle, air, ground response.
-	Variable to play sound when hit obstacle, air, ground.
+	Variable to play sound when hit obstacle, air, ground, dead.
 	Playtest
 	Editing levels
 	David H quickly learns that press goes down.
