@@ -116,22 +116,22 @@ public class PlayerController : MonoBehaviour {
 			//Not sure we'll kill him in either of these cases?
 			//This may be a jump?
 			//SetDead (true);
-		} else if (other.gameObject.tag == "Ground") {
-			Debug.Log ("Hit Ground");
-			//Not sure we'll kill him in either of these cases?
-			//This may bump him upwards? Don't know what this should do.
-			SetOnGround (true);
-		} else if (other.gameObject.tag == "Wave") {
-			Debug.Log ("Hit Wave");
-			SetDead (true);
 		}
 	}
 
 	void OnTriggerEnter2D (Collider2D other) 
 	{
-		if (other.gameObject.tag == "Air") {
-			Debug.Log ("Hit Air");
+		if (other.gameObject.tag == "Wave") {
+			Debug.Log ("Hit Wave");
+			SetDead (true);
+		}
+		else if (other.gameObject.tag == "Air") {
+			// Debug.Log ("Hit Air");
 			SetInAir (true);
+		}
+		else if (other.gameObject.tag == "Ground") {
+			// Debug.Log ("Hit Ground");
+			SetOnGround (true);
 		}
 	}
 
