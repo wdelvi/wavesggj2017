@@ -17,9 +17,10 @@ DONE
 
 TODO
 
-	David H challenged by many obstacles
+	David H challenged by many obstacles (+Corey)
 	David H hits obstacle and notices penalty.
 	Obstacle, air, ground response.
+	Variable to play sound when hit obstacle, air, ground.
 	Playtest
 	Editing levels
 	David H quickly learns that press goes down.
@@ -31,6 +32,7 @@ TODO
 	Sound
 	Submit
 	Playtest
+	Corey feels natural back and up.
 	Finger tap instruction
 		at wave
 	Playtest
