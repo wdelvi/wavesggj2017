@@ -78,32 +78,31 @@ public class LevelController
 
 	private void CreateInitialHand( )
 	{
-		GameObject chunkOne = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
-		GameObject chunkTwo = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
-		GameObject chunkThree = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
-
-		this.levelChunkHand.Add ( chunkOne );
-		this.levelChunkHand.Add ( chunkTwo );
-		this.levelChunkHand.Add ( chunkThree );
-		 
-		chunkOne.transform.localPosition = new Vector3 ( Screen.width, 0, 0 ); 
-		chunkTwo.transform.localPosition = new Vector3 ( chunkOne.transform.Find("Bounds").transform.localPosition.x, 0, 0 );
-		chunkThree.transform.localPosition = new Vector3 ( chunkTwo.transform.Find("Bounds").transform.localPosition.x, 0, 0 );
-
-		chunkOne.transform.parent = this.levelChunkHolder.transform;
-		chunkTwo.transform.parent = this.levelChunkHolder.transform;
-		chunkThree.transform.parent = this.levelChunkHolder.transform;
+		for (int i = 0; i < handLength; i++)
+		{
+			this.PlaceCardInHand ();
+		}
 	}
 
 	private void PlaceCardInHand()
 	{
 		GameObject newLevelChunk = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
-		newLevelChunk.transform.localPosition = new Vector3 ( this.levelChunkHand[this.levelChunkHand.Count-1].transform.Find("Bounds").transform.position.x, 0, 0 );
+
+		float newChunkX = 8;
+		if (this.levelChunkHand.Count >= 1)
+		{
+			newChunkX = this.levelChunkHand [this.levelChunkHand.Count - 1].transform.Find ("Bounds").transform.position.x;
+		}
+
+		newLevelChunk.transform.localPosition = new Vector3 ( newChunkX, 0, 0 );
 		newLevelChunk.transform.parent = this.levelChunkHolder.transform;
 		this.levelChunkHand.Add ( newLevelChunk );
 
-		GameObject oldLevelChunk = this.levelChunkHand [0];
-		this.levelChunkHand.Remove ( oldLevelChunk );
-		UnityEngine.Object.Destroy ( oldLevelChunk );
+		if ( this.levelChunkHand.Count > handLength )
+		{
+			GameObject oldLevelChunk = this.levelChunkHand [0];
+			this.levelChunkHand.Remove (oldLevelChunk);
+			UnityEngine.Object.Destroy (oldLevelChunk);
+		}
 	}
 }
