@@ -26,7 +26,10 @@ public class LevelController
 
 	public void Update () 
 	{
-		
+		if ( this.levelChunkHand.Count > 2 && this.levelChunkHand [2].transform.localPosition.x < Camera.main.transform.localPosition.x )
+		{
+			this.PlaceCardInHand ();
+		}
 	}
 
 	private void ShuffleDeck()
@@ -64,11 +67,25 @@ public class LevelController
 	{
 		GameObject chunkOne = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
 		GameObject chunkTwo = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
+		GameObject chunkThree = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
 
 		this.levelChunkHand.Add ( chunkOne );
 		this.levelChunkHand.Add ( chunkTwo );
+		this.levelChunkHand.Add ( chunkThree );
 		 
 		chunkOne.transform.localPosition = new Vector3 ( 0, 0, 0 ); 
-		chunkTwo.transform.localPosition = new Vector3 ( chunkOne.transform.Find("bounds").transform.localPosition.x, 0, 0 );
+		chunkTwo.transform.localPosition = new Vector3 ( chunkOne.transform.Find("Bounds").transform.localPosition.x, 0, 0 );
+		chunkThree.transform.localPosition = new Vector3 ( chunkTwo.transform.Find("Bounds").transform.localPosition.x, 0, 0 );
+	}
+
+	private void PlaceCardInHand()
+	{
+		GameObject newLevelChunk = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
+		newLevelChunk.transform.localPosition = new Vector3 ( this.levelChunkHand[this.levelChunkHand.Count-1].transform.Find("Bounds").transform.position.x, 0, 0 );
+		this.levelChunkHand.Add ( newLevelChunk );
+
+		GameObject oldLevelChunk = this.levelChunkHand [0];
+		this.levelChunkHand.Remove ( oldLevelChunk );
+		UnityEngine.Object.Destroy ( oldLevelChunk );
 	}
 }
