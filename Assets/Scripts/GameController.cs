@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour 
 {
+	//Speed at which objects are moved
+	public float gameSpeed;
+
 	public GameObject player;
 
-	public List<GameObject> followPlayer;	
+	//The objects that get moved allong the x
+	public List<GameObject> objectsToMove;	
 
 	//All of our options for chunks
 	public List<GameObject> levelChunkOptions;
@@ -32,11 +36,11 @@ public class GameController : MonoBehaviour
 
 	void UpdateFollowObjects()
 	{
-		for (int i = 0; i < this.followPlayer.Count; i++)
+		for (int i = 0; i < this.objectsToMove.Count; i++)
 		{
-			Vector3 newPosition = this.followPlayer [i].transform.localPosition;
-			newPosition.x = this.player.transform.localPosition.x;
-			this.followPlayer [i].transform.localPosition = newPosition;
+			Vector3 newPosition = this.objectsToMove [i].transform.localPosition;
+			newPosition.x += gameSpeed;
+			this.objectsToMove [i].transform.localPosition = newPosition;
 		}
 	}
 

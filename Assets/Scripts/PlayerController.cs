@@ -25,11 +25,14 @@ public class PlayerController : MonoBehaviour {
 	private float speed_v;			// vertical speed
 	private Rigidbody2D rb;
 
+	private float starting_y;
+
 	// Use this for initialization
 	void Start () {
 		is_dead = false;
 		is_in_wave = true;
 		rb = GetComponent<Rigidbody2D> ();
+		this.starting_y = this.gameObject.transform.localPosition.y;
 	}
 	
 	// Update is called once per frame
@@ -54,7 +57,11 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 
-			transform.Translate (Vector2.right * speed_h * Time.deltaTime);
+			float final_speed_h = ( speed_h * ( this.gameObject.transform.localPosition.y - this.starting_y ) );
+
+			Debug.Log (this.gameObject.transform.localPosition.y - this.starting_y);
+
+			transform.Translate ( Vector2.right * final_speed_h * Time.deltaTime );
 		}
 	}
 
@@ -73,10 +80,17 @@ public class PlayerController : MonoBehaviour {
 	void OnColliderEnter2D (Collision2D other) {
 		if (other.gameObject.tag == "Obstacle") {
 			Debug.Log ("Hit obstacle");
-			SetDead (true);
+			//Not sure we'll kill him in either of these cases?
+			//This may be a jump?
+			//SetDead (true);
 		} else if (other.gameObject.tag == "Ground") {
 			Debug.Log ("Hit Ground");
-			SetOnGround (true);
+			//Not sure we'll kill him in either of these cases?
+			//This may bump him upwards? Don't know what this should do.
+			//SetOnGround (true);
+		} else if (other.gameObject.tag == "Wave") {
+			Debug.Log ("Hit Wave");
+			SetDead (true);
 		}
 	}
 
