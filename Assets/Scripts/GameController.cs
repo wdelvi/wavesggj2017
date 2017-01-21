@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		levelController = new LevelController ( this.levelChunkOptions );
+		this.levelController = new LevelController ( this.levelChunkOptions );
 	}
 	
 	// Update is called once per frame

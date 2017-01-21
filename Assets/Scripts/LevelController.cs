@@ -17,6 +17,8 @@ public class LevelController
 	{
 		this.levelChunkOptions = levelChunkOptions;
 
+		this.levelChunkHand = new List<GameObject>();
+
 		this.ShuffleDeck ();
 
 		this.CreateInitialHand ();
@@ -47,7 +49,7 @@ public class LevelController
 		if( this.levelChunkDeck.Count > 0 )
 		{
 			levelCard = this.levelChunkDeck [0];
-			this.levelChunkDeck.Remove (this.levelChunkDeck [0]);
+			this.levelChunkDeck.Remove ( this.levelChunkDeck [0] );
 		}
 		else
 		{
@@ -62,13 +64,11 @@ public class LevelController
 	{
 		GameObject chunkOne = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
 		GameObject chunkTwo = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
-		GameObject chunkThree = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
-		levelChunkHand.Add ( chunkOne );
-		levelChunkHand.Add ( chunkTwo );
-		levelChunkHand.Add ( chunkThree );
+
+		this.levelChunkHand.Add ( chunkOne );
+		this.levelChunkHand.Add ( chunkTwo );
 		 
-		chunkOne.transform.localPosition = new Vector3 ( chunkTwo.transform.position.x - chunkTwo.GetComponent<Renderer>().bounds.size.x, 0, 0 ); 
-		chunkTwo.transform.localPosition = new Vector3 ( 0, 0, 0 );
-		chunkThree.transform.localPosition = new Vector3 ( chunkTwo.transform.position.x + chunkTwo.GetComponent<Renderer>().bounds.size.x, 0, 0 ); 
+		chunkOne.transform.localPosition = new Vector3 ( 0, 0, 0 ); 
+		chunkTwo.transform.localPosition = new Vector3 ( chunkOne.transform.Find("bounds").transform.localPosition.x, 0, 0 );
 	}
 }
