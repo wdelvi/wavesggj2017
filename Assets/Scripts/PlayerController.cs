@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour {
 	public bool is_on_ground;		// player is on ground
 
 	private float speed_v;			// vertical speed
-	private float air_y = -1.0;
-	private float ground_y = -1.0;
+	private float air_y = -1.0f;
+	private float ground_y = -1.0f;
 	private Rigidbody2D rb;
 
 	// private float starting_y;
@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour {
 	// Always update if the mouse button or Space key was pressed.
 	// So the game controller can know when button is pressed at title screen.
 	public void UpdateFrame() {
+		// is_down = Input.GetKey ("space") || Input.GetMouseButton(0);
 		if (!is_dead && is_input_enabled) {
 			UpdateHorizontalSpeed();
 			UpdateVerticalSpeed();
@@ -129,12 +130,12 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerExit2D (Collider2D other) {
 		if (other.gameObject.tag == "Air") {
-			if (other.relativeVelocity.y < 0.0f)
+			// if (other.relativeVelocity.y < 0.0f)
 			{
 				SetInAir (false);
 			}
 		} else if (other.gameObject.tag == "Ground") {
-			if (0.0f < other.relativeVelocity.y)
+			// if (0.0f < other.relativeVelocity.y)
 			{
 				SetOnGround (false);
 			}
