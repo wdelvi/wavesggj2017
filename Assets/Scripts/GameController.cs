@@ -58,6 +58,9 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	private void Update () 
 	{
+		bool inputDown = Input.GetKey ("space") || Input.GetMouseButton(0);
+		this.playerController.is_down = inputDown;
+
 		if ( this.gameActive && !this.gamePaused )
 		{
 			this.playerController.UpdateFrame ();
@@ -72,9 +75,9 @@ public class GameController : MonoBehaviour
 		}
 		else
 		{
-			if ( this.playerController.is_down )
+			if ( inputDown )
 			{
-				this.GameInput ();
+				this.InputPressed ();
 			}
 		}
 	}
@@ -95,7 +98,7 @@ public class GameController : MonoBehaviour
 		this.meterCounter.text = "" + inflatedXPosition + " M";  
 	}
 
-	private void GameInput()
+	private void InputPressed()
 	{
 		if ( this.gameActive && this.playerController.is_dead )
 		{
