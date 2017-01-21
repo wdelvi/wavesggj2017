@@ -26,6 +26,7 @@ DONE
 	Nitiam reads large distance whole number starting from 0.
 		End screen shows score in text.
 	Nitiam sees first level without second overlapping.
+	Sound
 
 TODO
 
@@ -43,7 +44,6 @@ TODO
 	Playtest
 	Artwork
 	Playtest
-	Sound
 	Submit
 	Playtest
 	Corey feels natural back and up.
@@ -54,4 +54,5 @@ TODO
 		Wave
 	Particle system
 	Playtest
+	Jump
 	Music

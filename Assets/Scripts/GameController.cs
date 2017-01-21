@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour
 		this.distanceUI.text = "";
 		distance = 0.0f;
 		distanceWhole = 0;
+		this.deathUI.gameObject.SetActive(false);
 		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 		playerController.Setup();
 		this.sound = this.GetComponent<AudioSource> ();

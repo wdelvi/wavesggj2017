@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
 
 	public bool is_in_air;		// player at top
 	public bool is_in_wave;		// player in middle
+	public bool is_in_right_edge;
 	public bool is_on_ground;		// player is on ground
 	public bool is_collide_next;
 	public bool is_collide_now;
@@ -66,6 +67,10 @@ public class PlayerController : MonoBehaviour {
 		else if (is_collide_now)
 		{
 			speed_h = speed_h_on_ground;
+			speed_h_acceleration += speed_h_jerk_up;
+		}
+		else if (is_in_right_edge)
+		{
 			speed_h_acceleration += speed_h_jerk_up;
 		}
 		else if (is_in_wave)
@@ -150,6 +155,9 @@ public class PlayerController : MonoBehaviour {
 	public void SetInAir (bool _is_in_air) {
 		is_in_air = _is_in_air;
 	}
+	public void SetInRightSide (bool _is_in_right_edge) {
+		is_in_right_edge = _is_in_right_edge;
+	}
 
 	public void SetInWave (bool _is_in_wave) {
 		is_in_wave = _is_in_wave;
@@ -180,6 +188,10 @@ public class PlayerController : MonoBehaviour {
 			// Debug.Log ("Trigger Air");
 			SetInAir (true);
 		}
+		else if (other.gameObject.tag == "RightSide") {
+			// Debug.Log ("Trigger Air");
+			SetInRightSide (true);
+		}
 		else if (other.gameObject.tag == "Ground") {
 			// Debug.Log ("Trigger Ground");
 			SetOnGround (true);
@@ -191,6 +203,8 @@ public class PlayerController : MonoBehaviour {
 			SetInAir (false);
 		} else if (other.gameObject.tag == "Ground") {
 			SetOnGround (false);
+		} else if (other.gameObject.tag == "RightSide") {
+			SetInRightSide (false);
 		}
 	}
 }
