@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 
 	private float starting_y;
 
-	private bool is_down;
+	public bool is_down;
 
 	// Use this for initialization
 	public void Setup() {
