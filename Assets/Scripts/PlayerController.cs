@@ -5,48 +5,45 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	[SerializeField]
-	private float speed_h;		// horizontal speed
+	private float speed_h = 0.5f;	// horizontal speed
 
 	[SerializeField]
-	private float speed_wave;	// vertical speed of wave
+	private float speed_wave = 2f;	// vertical speed of wave
 
 	[SerializeField]
-	private float speed_gravity;// vertical speed of gravity
+	private float speed_press = 3f;	// vertical speed of pressing
 
 	[SerializeField]
-	private float speed_press;	// vertical speed of pressing
+	private bool is_dead;			// player is dead, disable input
 
 	[SerializeField]
-	private bool is_dead;		// player is dead, disable input
+	private bool is_in_wave;		// player is inside of a wave
 
-	[SerializeField]
-	private bool is_in_wave;	// player is inside of a wave
-
-	private float speed_v;		// vertical speed
+	private float speed_v;			// vertical speed
+	private Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start () {
-		speed_h = 10f;
-		speed_wave = 10f;
-		speed_gravity = 5f;
-		speed_press = 10f;
 		is_dead = false;
 		is_in_wave = true;
+		rb = GetComponent<Rigidbody2D> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (!is_dead) {	// if player is alive, accept input
 			// movement
-			if (is_in_wave && Input.GetKeyDown ("space")) {
+			if (is_in_wave && Input.GetKey ("space")) {
 				// force down
-				speed_v = speed_wave - speed_gravity - speed_press; 
+				speed_v = speed_wave - speed_press;
 			} else if (is_in_wave) {
-				speed_v = speed_wave - speed_gravity;
-			} else {
-				speed_v = -1 * speed_gravity;
+				speed_v = speed_wave;
 			}
-			transform.Translate (Vector2.up * speed_v * Time.deltaTime);
+			if (speed_v >= 0) {
+				rb.AddForce (Vector2.up * speed_v);
+			} else {
+				rb.AddForce (Vector2.down * speed_v * -1);
+			}
 			transform.Translate (Vector2.right * speed_h * Time.deltaTime);
 		}
 	}
