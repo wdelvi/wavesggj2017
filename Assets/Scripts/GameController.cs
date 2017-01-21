@@ -107,22 +107,22 @@ public class GameController : MonoBehaviour
 
 	private void UpdateSounds( bool newInput, bool oldInput )
 	{
-		if (this.playerController.is_in_wave)
+		if (this.playerController.is_dead && this.gameActive)
 		{
 			this.PlayRandomSound ( this.wipeoutSounds );
 		}
 		else if (newInput == true && oldInput == false)
 		{
-			this.PlayRandomSound ( this.downSounds );	
+			this.PlayRandomSound ( this.upSounds );	
 		}
-		else if (newInput == true && oldInput == false)
+		else if (newInput == false && oldInput == true)
 		{
-			this.PlayRandomSound ( this.upSounds );
+			this.PlayRandomSound ( this.downSounds );
 		}
-		else if (this.playerController.is_in_air)
-		{
-			this.PlayRandomSound ( this.hitSounds );
-		}
+		//else if (this.playerController.hit_obstacle)
+		//{
+		//	this.PlayRandomSound ( this.hitSounds );
+		//}
 		else if (this.playerController.is_in_air)
 		{
 			this.PlayRandomSound ( this.airSounds );
@@ -135,9 +135,12 @@ public class GameController : MonoBehaviour
 
 	private void PlayRandomSound( List<AudioClip> soundClips )
 	{
-		AudioClip clipToPlay = soundClips[ Random.Range (0, soundClips.Count - 1) ]; 
-		this.sound.clip = clipToPlay;
-		this.sound.Play ();
+		if (!this.sound.isPlaying)
+		{
+			AudioClip clipToPlay = soundClips [Random.Range (0, soundClips.Count - 1)]; 
+			this.sound.clip = clipToPlay;
+			this.sound.Play ();
+		}
 	}
 
 	private void UpdateUI()
