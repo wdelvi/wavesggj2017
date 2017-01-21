@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float speed_h = 0.0f;	// horizontal speed
-	public float speed_h_in_wave = -2.0f;
-	public float speed_h_in_air = -3.0f;
-	public float speed_h_on_ground = -3.0f;
-	public float speed_h_down_add = 4.0f;
+	public float speed_h_in_wave = -4.0f;
+	public float speed_h_in_air = -8.0f;
+	public float speed_h_on_ground = -8.0f;
+	public float speed_h_down_add = 5.0f;
+	public float speed_h_down_add_force = 6.0f;
 
 	public float speed_wave = 5f;	// vertical speed of wave
 
@@ -26,9 +27,10 @@ public class PlayerController : MonoBehaviour {
 	private float ground_y = -1.0f;
 	private Rigidbody2D rb;
 
-	// private float starting_y;
-
 	public bool is_down;
+
+	public bool is_force = true;
+	public float force_multiplier = 200.0f;
 
 	// Use this for initialization
 	public void Setup() {
@@ -38,7 +40,6 @@ public class PlayerController : MonoBehaviour {
 		is_in_air = false;
 		is_on_ground = false;
 		rb = GetComponent<Rigidbody2D> ();
-		// this.starting_y = this.gameObject.transform.localPosition.y;
 	}
 
 	private void UpdateHorizontalSpeed() {
@@ -56,7 +57,14 @@ public class PlayerController : MonoBehaviour {
 		}
 		if (is_down)
 		{
-			speed_h += speed_h_down_add;
+			if (is_force)
+			{
+				speed_h += speed_h_down_add_force;
+			}
+			else
+			{
+				speed_h += speed_h_down_add;
+			}
 		}
 	}
 
@@ -82,15 +90,14 @@ public class PlayerController : MonoBehaviour {
 		if (!is_dead && is_input_enabled) {
 			UpdateHorizontalSpeed();
 			UpdateVerticalSpeed();
-			/*
-			if (speed_v >= 0) {
-				rb.AddForce (Vector2.up * speed_v);
-			} else {
-				rb.AddForce (Vector2.down * speed_v * -1);
+			if (is_force) {
+				rb.AddRelativeForce (Vector2.up * speed_v * Time.deltaTime * force_multiplier );
+				rb.AddRelativeForce (Vector2.right * speed_h * Time.deltaTime * force_multiplier );
 			}
-			 */
-			transform.Translate ( Vector2.up * speed_v * Time.deltaTime );
-			transform.Translate ( Vector2.right * speed_h * Time.deltaTime );
+			else {
+				transform.Translate ( Vector2.up * speed_v * Time.deltaTime );
+				transform.Translate ( Vector2.right * speed_h * Time.deltaTime );
+			}
 		}
 	}
 
@@ -122,30 +129,30 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other) 
 	{
 		if (other.gameObject.tag == "Wave") {
-			Debug.Log ("Hit Wave");
+			Debug.Log ("Trigger Wave");
 			SetDead (true);
 		}
+		else if (other.gameObject.tag == "Obstacle") {
+			Debug.Log ("Trigger obstacle");
+			//Not sure we'll kill him in either of these cases?
+			//This may be a jump?
+			//SetDead (true);
+		}
 		else if (other.gameObject.tag == "Air") {
-			// Debug.Log ("Hit Air");
+			// Debug.Log ("Trigger Air");
 			SetInAir (true);
 		}
 		else if (other.gameObject.tag == "Ground") {
-			// Debug.Log ("Hit Ground");
+			// Debug.Log ("Trigger Ground");
 			SetOnGround (true);
 		}
 	}
 
 	void OnTriggerExit2D (Collider2D other) {
 		if (other.gameObject.tag == "Air") {
-			// if (other.relativeVelocity.y < 0.0f)
-			{
-				SetInAir (false);
-			}
+			SetInAir (false);
 		} else if (other.gameObject.tag == "Ground") {
-			// if (0.0f < other.relativeVelocity.y)
-			{
-				SetOnGround (false);
-			}
+			SetOnGround (false);
 		}
 	}
 }
