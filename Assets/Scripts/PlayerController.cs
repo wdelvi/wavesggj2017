@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public float speed_h = 1.5f;	// horizontal speed
-	public float speed_h_in_wave = 1.25f;
-	public float speed_h_in_air = 0.125f;
-	public float speed_h_on_ground = 0.125f;
+	public float speed_h = 0.0f;	// horizontal speed
+	public float speed_h_in_wave = -2.0f;
+	public float speed_h_in_air = -3.0f;
+	public float speed_h_on_ground = -3.0f;
+	public float speed_h_down_add = 4.0f;
 
 	public float speed_wave = 5f;	// vertical speed of wave
 
@@ -53,6 +54,10 @@ public class PlayerController : MonoBehaviour {
 		{
 			speed_h = speed_h_in_wave;
 		}
+		if (is_down)
+		{
+			speed_h += speed_h_down_add;
+		}
 	}
 
 	// force down on press
@@ -74,15 +79,17 @@ public class PlayerController : MonoBehaviour {
 	// Always update if the mouse button or Space key was pressed.
 	// So the game controller can know when button is pressed at title screen.
 	public void UpdateFrame() {
-		// is_down = Input.GetKey ("space") || Input.GetMouseButton(0);
 		if (!is_dead && is_input_enabled) {
 			UpdateHorizontalSpeed();
 			UpdateVerticalSpeed();
+			/*
 			if (speed_v >= 0) {
 				rb.AddForce (Vector2.up * speed_v);
 			} else {
 				rb.AddForce (Vector2.down * speed_v * -1);
 			}
+			 */
+			transform.Translate ( Vector2.up * speed_v * Time.deltaTime );
 			transform.Translate ( Vector2.right * speed_h * Time.deltaTime );
 		}
 	}
