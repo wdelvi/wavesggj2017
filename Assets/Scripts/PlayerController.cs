@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed_press = 10f;	// vertical speed of pressing
 
+	public bool is_input_enabled = true;
 	public bool is_dead;			// player is dead, disable input
 
 	public bool is_in_air;		// player at top
@@ -20,9 +21,11 @@ public class PlayerController : MonoBehaviour {
 	public bool is_on_ground;		// player is on ground
 
 	private float speed_v;			// vertical speed
+	private float air_y = -1.0f;
+	private float ground_y = -1.0f;
 	private Rigidbody2D rb;
 
-	private float starting_y;
+	// private float starting_y;
 
 	public bool is_down;
 
@@ -34,10 +37,10 @@ public class PlayerController : MonoBehaviour {
 		is_in_air = false;
 		is_on_ground = false;
 		rb = GetComponent<Rigidbody2D> ();
-		this.starting_y = this.gameObject.transform.localPosition.y;
+		// this.starting_y = this.gameObject.transform.localPosition.y;
 	}
 
-	private void UpdateSpeed() {
+	private void UpdateHorizontalSpeed() {
 		if (is_in_air)
 		{
 			speed_h = speed_h_in_air;
@@ -51,37 +54,36 @@ public class PlayerController : MonoBehaviour {
 			speed_h = speed_h_in_wave;
 		}
 	}
-	
+
+	// force down on press
+	// If out of bounds, return to bounds.
+	private void UpdateVerticalSpeed() {
+		if (is_in_air) {
+			speed_v = -speed_wave;
+		} else if (is_on_ground) {
+			speed_v = speed_wave;
+		} else if (is_in_wave && is_down) {
+			speed_v = speed_wave - speed_press;
+		} else if (is_in_wave) {
+			speed_v = speed_wave;
+		}
+	}
+
 	// Update is called once per frame
+	// If player is alive, input moves player down.
+	// Always update if the mouse button or Space key was pressed.
+	// So the game controller can know when button is pressed at title screen.
 	public void UpdateFrame() {
-		is_down = Input.GetKey ("space") || Input.GetMouseButton(0);
-		if (!is_dead) {	// if player is alive, accept input
-			UpdateSpeed();
-			// movement
-			if (is_on_ground) {
-				// 
+		// is_down = Input.GetKey ("space") || Input.GetMouseButton(0);
+		if (!is_dead && is_input_enabled) {
+			UpdateHorizontalSpeed();
+			UpdateVerticalSpeed();
+			if (speed_v >= 0) {
+				rb.AddForce (Vector2.up * speed_v);
 			} else {
-				
-				if (is_in_wave && is_down) {
-					// force down
-					speed_v = speed_wave - speed_press;
-				} else if (is_in_wave) {
-					speed_v = speed_wave;
-				} else {
-					speed_v = 0;
-				}
-				if (speed_v >= 0) {
-					rb.AddForce (Vector2.up * speed_v);
-				} else {
-					rb.AddForce (Vector2.down * speed_v * -1);
-				}
+				rb.AddForce (Vector2.down * speed_v * -1);
 			}
-
-			float final_speed_h = ( speed_h * ( this.gameObject.transform.localPosition.y - this.starting_y ) );
-
-			// Debug.Log (this.gameObject.transform.localPosition.y - this.starting_y);
-
-			transform.Translate ( Vector2.right * final_speed_h * Time.deltaTime );
+			transform.Translate ( Vector2.right * speed_h * Time.deltaTime );
 		}
 	}
 
@@ -128,9 +130,15 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerExit2D (Collider2D other) {
 		if (other.gameObject.tag == "Air") {
-			SetInAir (false);
+			// if (other.relativeVelocity.y < 0.0f)
+			{
+				SetInAir (false);
+			}
 		} else if (other.gameObject.tag == "Ground") {
-			SetOnGround (false);
+			// if (0.0f < other.relativeVelocity.y)
+			{
+				SetOnGround (false);
+			}
 		}
 	}
 }
