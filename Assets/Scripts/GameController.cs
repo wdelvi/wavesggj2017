@@ -109,15 +109,15 @@ public class GameController : MonoBehaviour
 	{
 		if (this.playerController.is_dead && this.gameActive)
 		{
-			this.PlayRandomSound ( this.wipeoutSounds );
+			this.PlayRandomSound ( this.wipeoutSounds, true );
 		}
 		else if (newInput == true && oldInput == false)
 		{
-			this.PlayRandomSound ( this.upSounds );	
+			this.PlayRandomSound ( this.upSounds, true );	
 		}
 		else if (newInput == false && oldInput == true)
 		{
-			this.PlayRandomSound ( this.downSounds );
+			this.PlayRandomSound ( this.downSounds, true );
 		}
 		//else if (this.playerController.hit_obstacle)
 		//{
@@ -125,21 +125,24 @@ public class GameController : MonoBehaviour
 		//}
 		else if (this.playerController.is_in_air)
 		{
-			this.PlayRandomSound ( this.airSounds );
+			this.PlayRandomSound ( this.airSounds, false );
 		}
 		else if (this.playerController.is_on_ground)
 		{
-			this.PlayRandomSound ( this.groundSounds );
+			this.PlayRandomSound ( this.groundSounds, false );
 		}
 	}
 
-	private void PlayRandomSound( List<AudioClip> soundClips )
+	private void PlayRandomSound( List<AudioClip> soundClips, bool interuptSounds )
 	{
-		if (!this.sound.isPlaying && soundClips.Count > 0)
+		if ( soundClips.Count > 0)
 		{
-			AudioClip clipToPlay = soundClips [Random.Range (0, soundClips.Count - 1)]; 
-			this.sound.clip = clipToPlay;
-			this.sound.Play ();
+			if (!this.sound.isPlaying || interuptSounds)
+			{
+				AudioClip clipToPlay = soundClips [Random.Range (0, soundClips.Count - 1)]; 
+				this.sound.clip = clipToPlay;
+				this.sound.Play ();
+			}
 		}
 	}
 
