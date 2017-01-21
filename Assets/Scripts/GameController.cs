@@ -17,11 +17,6 @@ public class GameController : MonoBehaviour
 	//The objects that get moved allong the x
 	public List<GameObject> objectsToMove;	
 
-	public GameObject levelChunkHolder;
-
-	//All of our options for chunks
-	public List<GameObject> levelChunkOptions;
-
 	public Text distanceUI;
 	public Text deathUI;
 
@@ -32,12 +27,12 @@ public class GameController : MonoBehaviour
 	public List<AudioClip> airSounds;
 	public List<AudioClip> groundSounds;
 
+	[SerializeField]
+	private LevelController levelController = new LevelController();
 	private bool gameActive = true;
 	private bool gamePaused = true;
 	private bool lastInput = false;
-
-	private LevelController levelController;
-	private AudioSource sound;
+		private AudioSource sound;
 		
 	// Use this for initialization
 	private void Start () 
@@ -45,7 +40,7 @@ public class GameController : MonoBehaviour
 		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 		playerController.Setup();
 		this.sound = this.GetComponent<AudioSource> ();
-		this.levelController = new LevelController ( this.levelChunkOptions, this.levelChunkHolder );
+		this.levelController.Setup();
 	}
 
 	private void EndGame()
