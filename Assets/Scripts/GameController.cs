@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour 
 {
@@ -21,25 +22,64 @@ public class GameController : MonoBehaviour
 	public Text meterCounter; 
 
 	private LevelController levelController;
+
+	private bool gameActive = true;
+	private bool gamePaused = true;
 		
 	// Use this for initialization
-	void Start () 
+	private void Start () 
 	{
 		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 		playerController.Setup();
 		this.levelController = new LevelController ( this.levelChunkOptions );
 	}
-	
-	// Update is called once per frame
-	void Update () 
+
+	private void EndGame()
 	{
-		this.playerController.UpdateFrame();
-		this.UpdateFollowObjects ();
-		this.UpdateUI ();
-		this.levelController.Update ();
+		this.PauseGame ();
+		this.gameActive = false;
 	}
 
-	void UpdateFollowObjects()
+	private void RestartGame()
+	{
+		SceneManager.LoadScene( "mainScene", LoadSceneMode.Single );
+	}
+
+	private void PauseGame()
+	{
+		this.gamePaused = true;
+	}
+
+	private void UnpauseGame()
+	{
+		this.gamePaused = false;
+	}
+	
+	// Update is called once per frame
+	private void Update () 
+	{
+		if ( this.gameActive && !this.gamePaused )
+		{
+			this.playerController.UpdateFrame ();
+			this.UpdateFollowObjects ();
+			this.UpdateUI ();
+			this.levelController.Update ();
+
+			if ( this.playerController.is_dead )
+			{
+				this.EndGame ();
+			}
+		}
+		else
+		{
+			if ( this.playerController.is_down )
+			{
+				this.GameInput ();
+			}
+		}
+	}
+
+	private void UpdateFollowObjects()
 	{
 		for (int i = 0; i < this.objectsToMove.Count; i++)
 		{
@@ -49,9 +89,28 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	void UpdateUI()
+	private void UpdateUI()
 	{
-		float inflatedXPosition = Mathf.Round( Camera.main.transform.localPosition.x * 10000 ) / 100;
+		float inflatedXPosition = Mathf.Round (Camera.main.transform.localPosition.x * 10000) / 100;
 		this.meterCounter.text = "" + inflatedXPosition + " M";  
+	}
+
+	private void GameInput()
+	{
+		if ( this.gameActive && this.playerController.is_dead )
+		{
+			this.EndGame ();
+		}
+		else if ( this.gamePaused )
+		{
+			if (this.playerController.is_dead)
+			{
+				this.RestartGame ();
+			}
+			else
+			{
+				this.UnpauseGame ();
+			}
+		}
 	}
 }
