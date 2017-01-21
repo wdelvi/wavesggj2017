@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float speed_h = 0.0f;	// horizontal speed
-	public float speed_h_in_wave = -4.0f;
+	public float speed_h_in_wave = -3.0f;
 	public float speed_h_in_air = -8.0f;
-	public float speed_h_on_ground = -8.0f;
+	public float speed_h_on_ground = -16.0f;
 	public float speed_h_down_add = 5.0f;
 	public float speed_h_down_add_force = 6.0f;
+	public float speed_h_collide = -256.0f;
 
 	public float speed_wave = 5f;	// vertical speed of wave
 
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour {
 	public bool is_in_air;		// player at top
 	public bool is_in_wave;		// player in middle
 	public bool is_on_ground;		// player is on ground
+	public bool is_collide_next;
+	public bool is_collide_now;
 
 	private float speed_v;			// vertical speed
 	private float air_y = -1.0f;
@@ -39,6 +42,8 @@ public class PlayerController : MonoBehaviour {
 		is_in_wave = true;
 		is_in_air = false;
 		is_on_ground = false;
+		is_collide_next = false;
+		is_collide_now = false;
 		rb = GetComponent<Rigidbody2D> ();
 	}
 
@@ -82,6 +87,15 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	private void UpdateCollide() {
+		is_collide_now = is_collide_next;
+		is_collide_next = false;
+		if (is_collide_now)
+		{
+			speed_h += speed_h_collide;
+		}
+	}
+
 	// Update is called once per frame
 	// If player is alive, input moves player down.
 	// Always update if the mouse button or Space key was pressed.
@@ -90,6 +104,7 @@ public class PlayerController : MonoBehaviour {
 		if (!is_dead && is_input_enabled) {
 			UpdateHorizontalSpeed();
 			UpdateVerticalSpeed();
+			UpdateCollide();
 			if (is_force) {
 				rb.AddRelativeForce (Vector2.up * speed_v * Time.deltaTime * force_multiplier );
 				rb.AddRelativeForce (Vector2.right * speed_h * Time.deltaTime * force_multiplier );
@@ -117,13 +132,9 @@ public class PlayerController : MonoBehaviour {
 		is_on_ground = _is_on_ground;
 	}
 
-	void OnColliderEnter2D (Collision2D other) {
-		if (other.gameObject.tag == "Obstacle") {
-			Debug.Log ("Hit obstacle");
-			//Not sure we'll kill him in either of these cases?
-			//This may be a jump?
-			//SetDead (true);
-		}
+	void OnCollisionEnter2D (Collision2D other) {
+		Debug.Log ("Hit obstacle");
+		is_collide_next = true;
 	}
 
 	void OnTriggerEnter2D (Collider2D other) 
