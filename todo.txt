@@ -13,13 +13,18 @@ DONE
 		Surfing the Great Wave
 		Press and hold to go down
 	On die, restart
+	Input feels comfortable
 
 TODO
 
-	Input feels comfortable
-		Obstacle, air, ground response.
+	David H challenged by many obstacles
+	David H hits obstacle and notices penalty.
+	Obstacle, air, ground response.
 	Playtest
 	Editing levels
+	David H quickly learns that press goes down.
+		Second tutorial screen.
+		Stay ahead of the wave.
 	Playtest
 	Artwork
 	Playtest

@@ -2,25 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class LevelController 
 {
+	public GameObject levelChunkHolder;
+
 	//All of our options for chunks
-	private List<GameObject> levelChunkOptions;
+	public List<GameObject> levelChunkOptions;
 
 	//All of our options starting shuffled and removing as used
-	private List<GameObject> levelChunkDeck;
+	public List<GameObject> levelChunkDeck;
 
 	//The current chunks that are instantiated into the game
-	private List<GameObject> levelChunkHand;
+	public List<GameObject> levelChunkHand;
 
-	private GameObject levelChunkHolder;
-
-	public LevelController ( List<GameObject> levelChunkOptions, GameObject levelChunkHolder ) 
+	public void Setup () 
 	{
-		this.levelChunkOptions = levelChunkOptions;
-
-		this.levelChunkHolder = levelChunkHolder;
-
 		this.levelChunkHand = new List<GameObject>();
 
 		this.ShuffleDeck ();

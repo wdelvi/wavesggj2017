@@ -17,15 +17,11 @@ public class GameController : MonoBehaviour
 	//The objects that get moved allong the x
 	public List<GameObject> objectsToMove;	
 
-	public GameObject levelChunkHolder;
-
-	//All of our options for chunks
-	public List<GameObject> levelChunkOptions;
-
 	public Text distanceUI;
 	public Text deathUI;
 
-	private LevelController levelController;
+	[SerializeField]
+	private LevelController levelController = new LevelController();
 	private bool gameActive = true;
 	private bool gamePaused = true;
 		
@@ -34,7 +30,7 @@ public class GameController : MonoBehaviour
 	{
 		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 		playerController.Setup();
-		this.levelController = new LevelController ( this.levelChunkOptions, this.levelChunkHolder );
+		this.levelController.Setup();
 	}
 
 	private void EndGame()
