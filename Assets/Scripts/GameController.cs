@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
 {
 	//Speed at which objects are moved
 	public float gameSpeed;
+	public float distance;
+	public int distanceWhole;
 	public float timeToBlockInputAfterDeath = 2;
 
 	public GameObject player;
@@ -39,6 +41,9 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	private void Start () 
 	{
+		this.distanceUI.text = "";
+		distance = 0.0f;
+		distanceWhole = 0;
 		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 		playerController.Setup();
 		this.sound = this.GetComponent<AudioSource> ();
@@ -51,6 +56,7 @@ public class GameController : MonoBehaviour
 		this.PauseGame ();
 		this.gameActive = false;
 		this.deathUI.gameObject.SetActive (true);
+		this.deathUI.text = "You surfed " + distanceWhole + "m. Tap to restart.";
 		this.inputBlockTimer = 0;
 	}
 
@@ -103,6 +109,7 @@ public class GameController : MonoBehaviour
 
 	private void UpdateFollowObjects()
 	{
+		distance += gameSpeed;
 		for (int i = 0; i < this.objectsToMove.Count; i++)
 		{
 			Vector3 newPosition = this.objectsToMove [i].transform.localPosition;
@@ -154,8 +161,8 @@ public class GameController : MonoBehaviour
 
 	private void UpdateUI()
 	{
-		float inflatedXPosition = Mathf.Round ( Camera.main.transform.localPosition.x * 10000 ) / 100;
-		this.distanceUI.text = "" + inflatedXPosition + " M";  
+		distanceWhole = (int)(Mathf.Round(distance));
+		this.distanceUI.text = distanceWhole + " m";  
 	}
 
 	private void InputPressed()

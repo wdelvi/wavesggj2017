@@ -22,15 +22,17 @@ DONE
 	Nitiam played a few times.
 	Player can move left and right.
 	Obstacle, air, ground response satisfies us.
-
-TODO
-
-	Nitiam sees first level without second overlapping.
-	Nitiam challenged but not overwhelmed.
-		David H challenged by ramp up of 6 levels.
 	Nitiam reads text in front.
 	Nitiam reads large distance whole number starting from 0.
 		End screen shows score in text.
+	Nitiam sees first level without second overlapping.
+
+TODO
+
+	Playtest
+	Nitiam challenged but not overwhelmed.
+		David H challenged by ramp up of 6 levels.
+	Playtest
 	Nitiam recognizes obstacles.
 	Nitiam recognizes wave immediately.
 	Nitiam recognizes surfer immediately.
