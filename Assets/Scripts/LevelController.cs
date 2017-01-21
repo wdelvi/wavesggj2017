@@ -2,15 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelController : MonoBehaviour {
+public class LevelController 
+{
+	//All of our options for chunks
+	public List<GameObject> levelChunkDeck;
 
-	// Use this for initialization
-	void Start () {
+	//All of our options starting shuffled and removing as used
+	private List<GameObject> shuffledLevelChunks;
+
+	//The current chunks that are instantiated into the game
+	private List<GameObject> levelChunkHand;
+
+	public LevelController () 
+	{
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	public void Update () 
+	{
 		
-	}
+	}	
 }
