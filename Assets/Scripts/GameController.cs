@@ -25,16 +25,26 @@ public class GameController : MonoBehaviour
 	public Text distanceUI;
 	public Text deathUI;
 
-	private LevelController levelController;
+	public List<AudioClip> downSounds;
+	public List<AudioClip> upSounds;
+	public List<AudioClip> wipeoutSounds;
+	public List<AudioClip> hitSounds;
+	public List<AudioClip> airSounds;
+	public List<AudioClip> groundSounds;
+
 	private bool gameActive = true;
 	private bool gamePaused = true;
 	private bool lastInput = false;
+
+	private LevelController levelController;
+	private AudioSource sound;
 		
 	// Use this for initialization
 	private void Start () 
 	{
 		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 		playerController.Setup();
+		this.sound = this.GetComponent<AudioSource> ();
 		this.levelController = new LevelController ( this.levelChunkOptions, this.levelChunkHolder );
 	}
 
@@ -71,7 +81,7 @@ public class GameController : MonoBehaviour
 			this.playerController.UpdateFrame ();
 			this.UpdateFollowObjects ();
 			this.UpdateUI ();
-			this.PlaySounds ( inputDown, lastInput );
+			this.UpdateSounds ( inputDown, lastInput );
 			this.levelController.Update ();
 
 			if ( this.playerController.is_dead )
@@ -100,24 +110,39 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	private void PlaySounds( bool newInput, bool oldInput )
+	private void UpdateSounds( bool newInput, bool oldInput )
 	{
 		if (this.playerController.is_in_wave)
 		{
-			
+			this.PlayRandomSound ( this.wipeoutSounds );
+		}
+		else if (newInput == true && oldInput == false)
+		{
+			this.PlayRandomSound ( this.downSounds );	
+		}
+		else if (newInput == true && oldInput == false)
+		{
+			this.PlayRandomSound ( this.upSounds );
 		}
 		else if (this.playerController.is_in_air)
 		{
-
+			this.PlayRandomSound ( this.hitSounds );
+		}
+		else if (this.playerController.is_in_air)
+		{
+			this.PlayRandomSound ( this.airSounds );
 		}
 		else if (this.playerController.is_on_ground)
 		{
-
+			this.PlayRandomSound ( this.groundSounds );
 		}
-		else if (this.playerController.is_in_air)
-		{
+	}
 
-		}
+	private void PlayRandomSound( List<AudioClip> soundClips )
+	{
+		AudioClip clipToPlay = soundClips[ Random.Range (0, soundClips.Count - 1) ]; 
+		this.sound.clip = clipToPlay;
+		this.sound.Play ();
 	}
 
 	private void UpdateUI()
