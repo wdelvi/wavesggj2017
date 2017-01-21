@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	[SerializeField]
 	public float speed_h = 1.5f;	// horizontal speed
+	public float speed_h_in_wave = 1.25f;
+	public float speed_h_in_air = 0.125f;
+	public float speed_h_on_ground = 0.125f;
 
-	[SerializeField]
 	public float speed_wave = 5f;	// vertical speed of wave
 
-	[SerializeField]
 	public float speed_press = 10f;	// vertical speed of pressing
 
-	[SerializeField]
-	private bool is_dead;			// player is dead, disable input
+	public bool is_dead;			// player is dead, disable input
 
-	[SerializeField]
-	private bool is_in_wave;		// player is inside of a wave
-
-	[SerializeField]
-	private bool is_on_ground;		// player is on ground
+	public bool is_in_air;		// player at top
+	public bool is_in_wave;		// player in middle
+	public bool is_on_ground;		// player is on ground
 
 	private float speed_v;			// vertical speed
 	private Rigidbody2D rb;
@@ -34,19 +31,37 @@ public class PlayerController : MonoBehaviour {
 		is_dead = false;
 		is_down = false;
 		is_in_wave = true;
+		is_in_air = false;
+		is_on_ground = false;
 		rb = GetComponent<Rigidbody2D> ();
 		this.starting_y = this.gameObject.transform.localPosition.y;
+	}
+
+	private void UpdateSpeed() {
+		if (is_in_air)
+		{
+			speed_h = speed_h_in_air;
+		}
+		else if (is_on_ground)
+		{
+			speed_h = speed_h_on_ground;
+		}
+		else if (is_in_wave)
+		{
+			speed_h = speed_h_in_wave;
+		}
 	}
 	
 	// Update is called once per frame
 	public void UpdateFrame() {
+		is_down = Input.GetKey ("space") || Input.GetMouseButton(0);
 		if (!is_dead) {	// if player is alive, accept input
+			UpdateSpeed();
 			// movement
 			if (is_on_ground) {
 				// 
 			} else {
 				
-				is_down = Input.GetKey ("space") || Input.GetMouseButton(0);
 				if (is_in_wave && is_down) {
 					// force down
 					speed_v = speed_wave - speed_press;
@@ -64,7 +79,7 @@ public class PlayerController : MonoBehaviour {
 
 			float final_speed_h = ( speed_h * ( this.gameObject.transform.localPosition.y - this.starting_y ) );
 
-			Debug.Log (this.gameObject.transform.localPosition.y - this.starting_y);
+			// Debug.Log (this.gameObject.transform.localPosition.y - this.starting_y);
 
 			transform.Translate ( Vector2.right * final_speed_h * Time.deltaTime );
 		}
@@ -72,6 +87,10 @@ public class PlayerController : MonoBehaviour {
 
 	public void SetDead (bool _is_dead) {
 		is_dead = _is_dead;
+	}
+
+	public void SetInAir (bool _is_in_air) {
+		is_in_air = _is_in_air;
 	}
 
 	public void SetInWave (bool _is_in_wave) {
@@ -92,7 +111,7 @@ public class PlayerController : MonoBehaviour {
 			Debug.Log ("Hit Ground");
 			//Not sure we'll kill him in either of these cases?
 			//This may bump him upwards? Don't know what this should do.
-			//SetOnGround (true);
+			SetOnGround (true);
 		} else if (other.gameObject.tag == "Wave") {
 			Debug.Log ("Hit Wave");
 			SetDead (true);
@@ -103,13 +122,13 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Air") {
 			Debug.Log ("Hit Air");
-			SetInWave (false);
+			SetInAir (true);
 		}
 	}
 
 	void OnTriggerExit2D (Collider2D other) {
 		if (other.gameObject.tag == "Air") {
-			SetInWave (true);
+			SetInAir (false);
 		} else if (other.gameObject.tag == "Ground") {
 			SetOnGround (false);
 		}
