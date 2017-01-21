@@ -56,3 +56,4 @@ TODO
 	Playtest
 	Jump
 	Music
+	Jumping Effect - No input while in air, but allow movement into space
