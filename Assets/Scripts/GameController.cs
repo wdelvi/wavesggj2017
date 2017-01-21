@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
 	//Speed at which objects are moved
 	public float gameSpeed;
+	public float timeToBlockInputAfterDeath = 2;
 
 	public GameObject player;
 
@@ -32,7 +33,8 @@ public class GameController : MonoBehaviour
 	private bool gameActive = true;
 	private bool gamePaused = true;
 	private bool lastInput = false;
-		private AudioSource sound;
+	private AudioSource sound;
+	private float inputBlockTimer;
 		
 	// Use this for initialization
 	private void Start () 
@@ -41,6 +43,7 @@ public class GameController : MonoBehaviour
 		playerController.Setup();
 		this.sound = this.GetComponent<AudioSource> ();
 		this.levelController.Setup();
+		this.inputBlockTimer = this.timeToBlockInputAfterDeath;
 	}
 
 	private void EndGame()
@@ -48,6 +51,7 @@ public class GameController : MonoBehaviour
 		this.PauseGame ();
 		this.gameActive = false;
 		this.deathUI.gameObject.SetActive (true);
+		this.inputBlockTimer = 0;
 	}
 
 	private void RestartGame()
@@ -66,7 +70,7 @@ public class GameController : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	private void Update () 
+	private void Update ( ) 
 	{
 		bool inputDown = Input.GetKey ("space") || Input.GetMouseButton(0);
 		this.playerController.is_down = inputDown;
@@ -86,7 +90,9 @@ public class GameController : MonoBehaviour
 		}
 		else
 		{
-			if ( inputDown )
+			this.inputBlockTimer += Time.deltaTime;
+
+			if ( inputDown && inputBlockTimer >= this.timeToBlockInputAfterDeath )
 			{
 				this.InputPressed ();
 			}
@@ -119,10 +125,10 @@ public class GameController : MonoBehaviour
 		{
 			this.PlayRandomSound ( this.downSounds, true );
 		}
-		//else if (this.playerController.hit_obstacle)
-		//{
-		//	this.PlayRandomSound ( this.hitSounds );
-		//}
+		else if (this.playerController.is_collide_now)
+		{
+			this.PlayRandomSound ( this.hitSounds, true );
+		}
 		else if (this.playerController.is_in_air)
 		{
 			this.PlayRandomSound ( this.airSounds, false );
