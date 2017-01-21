@@ -8,16 +8,18 @@ DONE
 		Wave model
 	Level editing and loading
 	Distance or time indicator
-
-TODO
-
-	On die, restart
-	Input feels comfortable
-	Playtest
 	At start pause all motion until input
 	Title screen with instruction
 		Surfing the Great Wave
 		Press and hold to go down
+	On die, restart
+
+TODO
+
+	Input feels comfortable
+		Obstacle, air, ground response.
+	Playtest
+	Editing levels
 	Playtest
 	Artwork
 	Playtest
@@ -31,3 +33,4 @@ TODO
 		Wave
 	Particle system
 	Playtest
+	Music
