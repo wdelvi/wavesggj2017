@@ -135,7 +135,7 @@ public class GameController : MonoBehaviour
 
 	private void PlayRandomSound( List<AudioClip> soundClips )
 	{
-		if (!this.sound.isPlaying)
+		if (!this.sound.isPlaying && soundClips.Count > 0)
 		{
 			AudioClip clipToPlay = soundClips [Random.Range (0, soundClips.Count - 1)]; 
 			this.sound.clip = clipToPlay;
