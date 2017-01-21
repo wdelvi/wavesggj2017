@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
 	private LevelController levelController;
 	private bool gameActive = true;
 	private bool gamePaused = true;
+	private bool lastInput = false;
 		
 	// Use this for initialization
 	private void Start () 
@@ -70,6 +71,7 @@ public class GameController : MonoBehaviour
 			this.playerController.UpdateFrame ();
 			this.UpdateFollowObjects ();
 			this.UpdateUI ();
+			this.PlaySounds ( inputDown, lastInput );
 			this.levelController.Update ();
 
 			if ( this.playerController.is_dead )
@@ -84,6 +86,8 @@ public class GameController : MonoBehaviour
 				this.InputPressed ();
 			}
 		}
+
+		this.lastInput = inputDown;
 	}
 
 	private void UpdateFollowObjects()
@@ -93,6 +97,26 @@ public class GameController : MonoBehaviour
 			Vector3 newPosition = this.objectsToMove [i].transform.localPosition;
 			newPosition.x += gameSpeed;
 			this.objectsToMove [i].transform.localPosition = newPosition;
+		}
+	}
+
+	private void PlaySounds( bool newInput, bool oldInput )
+	{
+		if (this.playerController.is_in_wave)
+		{
+			
+		}
+		else if (this.playerController.is_in_air)
+		{
+
+		}
+		else if (this.playerController.is_on_ground)
+		{
+
+		}
+		else if (this.playerController.is_in_air)
+		{
+
 		}
 	}
 
