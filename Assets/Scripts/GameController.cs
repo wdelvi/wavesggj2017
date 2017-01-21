@@ -18,6 +18,9 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		Vector3 newCameraPosition = Camera.main.transform.localPosition;
+		newCameraPosition.x += 0.1f;
+		Camera.main.transform.localPosition = newCameraPosition; 
 		this.levelController.Update ();
 	}
 }
