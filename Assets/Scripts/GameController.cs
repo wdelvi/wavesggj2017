@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
 	public float gameSpeed;
 
 	public GameObject player;
+	[SerializeField]
+	public PlayerController playerController;
 
 	//The objects that get moved allong the x
 	public List<GameObject> objectsToMove;	
@@ -23,12 +25,15 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+		playerController.Setup();
 		this.levelController = new LevelController ( this.levelChunkOptions );
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		this.playerController.UpdateFrame();
 		this.UpdateFollowObjects ();
 		this.UpdateUI ();
 		this.levelController.Update ();

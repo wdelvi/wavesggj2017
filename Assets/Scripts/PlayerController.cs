@@ -5,13 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	[SerializeField]
-	private float speed_h = 0.5f;	// horizontal speed
+	public float speed_h = 1.5f;	// horizontal speed
 
 	[SerializeField]
-	private float speed_wave = 2f;	// vertical speed of wave
+	public float speed_wave = 5f;	// vertical speed of wave
 
 	[SerializeField]
-	private float speed_press = 3f;	// vertical speed of pressing
+	public float speed_press = 10f;	// vertical speed of pressing
 
 	[SerializeField]
 	private bool is_dead;			// player is dead, disable input
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 	private bool is_down;
 
 	// Use this for initialization
-	void Start () {
+	public void Setup() {
 		is_dead = false;
 		is_down = false;
 		is_in_wave = true;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void UpdateFrame() {
 		if (!is_dead) {	// if player is alive, accept input
 			// movement
 			if (is_on_ground) {
