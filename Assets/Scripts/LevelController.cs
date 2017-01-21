@@ -18,9 +18,11 @@ public class LevelController
 	public List<GameObject> levelChunkHand;
 	public int handLength = 3;
 	public int handStep = 1;
+	public int handStart = -1;
 
 	public void Setup () 
 	{
+		handStart = -1;
 		this.levelChunkHand = new List<GameObject>();
 
 		this.ShuffleDeck ();
@@ -36,14 +38,15 @@ public class LevelController
 		}
 	}
 
-	private void SelectOptions()
+	private void IncrementLibrary()
 	{
-		this.levelChunkOptions = new List<GameObject>( this.levelChunkLibrary);
+		handStart = Mathf.Min(handStart + handStep, this.levelChunkLibrary.Count - handLength);
+		this.levelChunkOptions = this.levelChunkLibrary.GetRange(handStart, handLength);
 	}
 
 	private void ShuffleDeck()
 	{
-		SelectOptions();
+		IncrementLibrary();
 		this.levelChunkDeck = new List<GameObject>( this.levelChunkOptions );
 
 		for (int i = 0; i < this.levelChunkDeck.Count; i++)
