@@ -8,6 +8,7 @@ public class LevelController
 	public GameObject levelChunkHolder;
 
 	//All of our options for chunks
+	public List<GameObject> levelChunkLibrary;
 	public List<GameObject> levelChunkOptions;
 
 	//All of our options starting shuffled and removing as used
@@ -15,6 +16,8 @@ public class LevelController
 
 	//The current chunks that are instantiated into the game
 	public List<GameObject> levelChunkHand;
+	public int handLength = 3;
+	public int handStep = 1;
 
 	public void Setup () 
 	{
@@ -33,8 +36,14 @@ public class LevelController
 		}
 	}
 
+	private void SelectOptions()
+	{
+		this.levelChunkOptions = new List<GameObject>( this.levelChunkLibrary);
+	}
+
 	private void ShuffleDeck()
 	{
+		SelectOptions();
 		this.levelChunkDeck = new List<GameObject>( this.levelChunkOptions );
 
 		for (int i = 0; i < this.levelChunkDeck.Count; i++)

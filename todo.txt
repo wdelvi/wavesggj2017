@@ -21,6 +21,7 @@ DONE
 TODO
 
 	David H challenged by moderate obstacles (+Corey)
+	David H challenged by ramp up of obstacles.
 	Playtest
 	Obstacle, air, ground response.
 	Editing levels
