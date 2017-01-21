@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField]
 	private bool is_in_wave;		// player is inside of a wave
 
+	[SerializeField]
+	private bool is_on_ground;		// player is on ground
+
 	private float speed_v;			// vertical speed
 	private Rigidbody2D rb;
 
@@ -33,17 +36,24 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		if (!is_dead) {	// if player is alive, accept input
 			// movement
-			if (is_in_wave && Input.GetKey ("space")) {
-				// force down
-				speed_v = speed_wave - speed_press;
-			} else if (is_in_wave) {
-				speed_v = speed_wave;
-			}
-			if (speed_v >= 0) {
-				rb.AddForce (Vector2.up * speed_v);
+			if (is_on_ground) {
+				// 
 			} else {
-				rb.AddForce (Vector2.down * speed_v * -1);
+				if (is_in_wave && Input.GetKey ("space")) {
+					// force down
+					speed_v = speed_wave - speed_press;
+				} else if (is_in_wave) {
+					speed_v = speed_wave;
+				} else {
+					speed_v = 0;
+				}
+				if (speed_v >= 0) {
+					rb.AddForce (Vector2.up * speed_v);
+				} else {
+					rb.AddForce (Vector2.down * speed_v * -1);
+				}
 			}
+
 			transform.Translate (Vector2.right * speed_h * Time.deltaTime);
 		}
 	}
@@ -56,24 +66,33 @@ public class PlayerController : MonoBehaviour {
 		is_in_wave = _is_in_wave;
 	}
 
+	public void SetOnGround (bool _is_on_ground) {
+		is_on_ground = _is_on_ground;
+	}
+
 	void OnColliderEnter2D (Collision2D other) {
 		if (other.gameObject.tag == "Obstacle") {
 			Debug.Log ("Hit obstacle");
 			SetDead (true);
-		} 
+		} else if (other.gameObject.tag == "Ground") {
+			Debug.Log ("Hit Ground");
+			SetOnGround (true);
+		}
 	}
 
-	void OnTriigerEnter2D (Collider2D other) {
-		if (other.gameObject.tag == "Wave") {
-			Debug.Log ("Enter wave");
-			SetInWave (true);
+	void OnTriggerEnter2D (Collider2D other) 
+	{
+		if (other.gameObject.tag == "Air") {
+			Debug.Log ("Hit Air");
+			SetInWave (false);
 		}
 	}
 
 	void OnTriggerExit2D (Collider2D other) {
-		if (other.gameObject.tag == "Wave") {
-			Debug.Log ("Leave wave");
-			SetInWave (false);
+		if (other.gameObject.tag == "Air") {
+			SetInWave (true);
+		} else if (other.gameObject.tag == "Ground") {
+			SetOnGround (false);
 		}
 	}
 }
