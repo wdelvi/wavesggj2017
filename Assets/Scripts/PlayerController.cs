@@ -27,9 +27,12 @@ public class PlayerController : MonoBehaviour {
 
 	private float starting_y;
 
+	private bool is_down;
+
 	// Use this for initialization
 	void Start () {
 		is_dead = false;
+		is_down = false;
 		is_in_wave = true;
 		rb = GetComponent<Rigidbody2D> ();
 		this.starting_y = this.gameObject.transform.localPosition.y;
@@ -42,7 +45,9 @@ public class PlayerController : MonoBehaviour {
 			if (is_on_ground) {
 				// 
 			} else {
-				if (is_in_wave && Input.GetKey ("space")) {
+				
+				is_down = Input.GetKey ("space") || Input.GetMouseButton(0);
+				if (is_in_wave && is_down) {
 					// force down
 					speed_v = speed_wave - speed_press;
 				} else if (is_in_wave) {

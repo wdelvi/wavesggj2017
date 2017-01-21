@@ -1,16 +1,33 @@
+DONE
+
+	Landscape
+	Input
+		surfer physics
+			one button
+			inverted helicopter
+		Wave model
+	Level editing and loading
+	Distance or time indicator
+
 TODO
 
-Landscape
-Input
-	surfer physics
-		one button
-			inverted helicopter
-	Wave model
-Level editing and loading
-Artwork
-Animation
-	Wave
-Distance or time indicator
-Finger tap instruction
-	at wave
-Particle system
+	On die, restart
+	Input feels comfortable
+	Playtest
+	At start pause all motion until input
+	Title screen with instruction
+		Surfing the Great Wave
+		Press and hold to go down
+	Playtest
+	Artwork
+	Playtest
+	Sound
+	Submit
+	Playtest
+	Finger tap instruction
+		at wave
+	Playtest
+	Animation
+		Wave
+	Particle system
+	Playtest
