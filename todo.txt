@@ -15,13 +15,14 @@ DONE
 	On die, restart
 	Input feels comfortable
 	David H hits obstacle and notices penalty.
-	David H challenged by many obstacles (+Corey)
+	Variable to play sound when hit obstacle, air, ground, dead.
+	David H challenged by extreme obstacles (+Corey)
 
 TODO
 
-	Obstacle, air, ground response.
-	Variable to play sound when hit obstacle, air, ground, dead.
+	David H challenged by moderate obstacles (+Corey)
 	Playtest
+	Obstacle, air, ground response.
 	Editing levels
 	David H quickly learns that press goes down.
 		Second tutorial screen.
