@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour 
 {
+	public GameObject player;
+
+	public List<GameObject> followPlayer;	
+
 	//All of our options for chunks
 	public List<GameObject> levelChunkOptions;
 
@@ -21,17 +25,24 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		//Temporary function to move camera artifically
-		Vector3 newCameraPosition = Camera.main.transform.localPosition;
-		newCameraPosition.x += 0.1f;
-		Camera.main.transform.localPosition = newCameraPosition; 
-
+		this.UpdateFollowObjects ();
 		this.UpdateUI ();
 		this.levelController.Update ();
 	}
 
+	void UpdateFollowObjects()
+	{
+		for (int i = 0; i < this.followPlayer.Count; i++)
+		{
+			Vector3 newPosition = this.followPlayer [i].transform.localPosition;
+			newPosition.x = this.player.transform.localPosition.x;
+			this.followPlayer [i].transform.localPosition = newPosition;
+		}
+	}
+
 	void UpdateUI()
 	{
-		this.meterCounter.text = "" + ( Mathf.Round(Camera.main.transform.localPosition.x * 100 ) + Mathf.Round ( Random.Range( 0.0f, 0.99f ) * 100 ) / 100 ) + " M";  
+		float inflatedXPosition = Mathf.Round( Camera.main.transform.localPosition.x * 10000 ) / 100;
+		this.meterCounter.text = "" + inflatedXPosition + " M";  
 	}
 }
