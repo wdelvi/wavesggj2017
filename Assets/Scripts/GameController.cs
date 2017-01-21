@@ -10,19 +10,22 @@ public class GameController : MonoBehaviour
 	public float gameSpeed;
 
 	public GameObject player;
+
 	[SerializeField]
 	public PlayerController playerController;
 
 	//The objects that get moved allong the x
 	public List<GameObject> objectsToMove;	
 
+	public GameObject levelChunkHolder;
+
 	//All of our options for chunks
 	public List<GameObject> levelChunkOptions;
 
-	public Text meterCounter; 
+	public Text distanceUI;
+	public Text deathUI;
 
 	private LevelController levelController;
-
 	private bool gameActive = true;
 	private bool gamePaused = true;
 		
@@ -31,13 +34,14 @@ public class GameController : MonoBehaviour
 	{
 		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 		playerController.Setup();
-		this.levelController = new LevelController ( this.levelChunkOptions );
+		this.levelController = new LevelController ( this.levelChunkOptions, this.levelChunkHolder );
 	}
 
 	private void EndGame()
 	{
 		this.PauseGame ();
 		this.gameActive = false;
+		this.deathUI.gameObject.SetActive (true);
 	}
 
 	private void RestartGame()
@@ -94,8 +98,8 @@ public class GameController : MonoBehaviour
 
 	private void UpdateUI()
 	{
-		float inflatedXPosition = Mathf.Round (Camera.main.transform.localPosition.x * 10000) / 100;
-		this.meterCounter.text = "" + inflatedXPosition + " M";  
+		float inflatedXPosition = Mathf.Round ( Camera.main.transform.localPosition.x * 10000 ) / 100;
+		this.distanceUI.text = "" + inflatedXPosition + " M";  
 	}
 
 	private void InputPressed()

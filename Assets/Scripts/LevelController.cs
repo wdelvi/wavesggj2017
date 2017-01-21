@@ -13,9 +13,13 @@ public class LevelController
 	//The current chunks that are instantiated into the game
 	private List<GameObject> levelChunkHand;
 
-	public LevelController ( List<GameObject> levelChunkOptions ) 
+	private GameObject levelChunkHolder;
+
+	public LevelController ( List<GameObject> levelChunkOptions, GameObject levelChunkHolder ) 
 	{
 		this.levelChunkOptions = levelChunkOptions;
+
+		this.levelChunkHolder = levelChunkHolder;
 
 		this.levelChunkHand = new List<GameObject>();
 
@@ -73,15 +77,20 @@ public class LevelController
 		this.levelChunkHand.Add ( chunkTwo );
 		this.levelChunkHand.Add ( chunkThree );
 		 
-		chunkOne.transform.localPosition = new Vector3 ( 0, 0, 0 ); 
+		chunkOne.transform.localPosition = new Vector3 ( Screen.width, 0, 0 ); 
 		chunkTwo.transform.localPosition = new Vector3 ( chunkOne.transform.Find("Bounds").transform.localPosition.x, 0, 0 );
 		chunkThree.transform.localPosition = new Vector3 ( chunkTwo.transform.Find("Bounds").transform.localPosition.x, 0, 0 );
+
+		chunkOne.transform.parent = this.levelChunkHolder.transform;
+		chunkTwo.transform.parent = this.levelChunkHolder.transform;
+		chunkThree.transform.parent = this.levelChunkHolder.transform;
 	}
 
 	private void PlaceCardInHand()
 	{
 		GameObject newLevelChunk = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
 		newLevelChunk.transform.localPosition = new Vector3 ( this.levelChunkHand[this.levelChunkHand.Count-1].transform.Find("Bounds").transform.position.x, 0, 0 );
+		newLevelChunk.transform.parent = this.levelChunkHolder.transform;
 		this.levelChunkHand.Add ( newLevelChunk );
 
 		GameObject oldLevelChunk = this.levelChunkHand [0];
