@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour {
 	public float speed_h_down_add = 5.0f;
 	public float speed_h_down_add_force = 6.0f;
 	public float speed_h_collide = -256.0f;
+	public float speed_h_acceleration = 0.0f;
+	public float speed_h_jerk = 1.0f;
+	public float deltaTime;
 
 	public float speed_wave = 5f;	// vertical speed of wave
 
@@ -44,6 +47,7 @@ public class PlayerController : MonoBehaviour {
 		is_on_ground = false;
 		is_collide_next = false;
 		is_collide_now = false;
+		deltaTime = 0.0f;
 		rb = GetComponent<Rigidbody2D> ();
 	}
 
@@ -70,7 +74,13 @@ public class PlayerController : MonoBehaviour {
 			{
 				speed_h += speed_h_down_add;
 			}
+			speed_h_acceleration += speed_h_jerk * deltaTime;
 		}
+		else
+		{
+			speed_h_acceleration -= speed_h_acceleration * deltaTime;
+		}
+		speed_h += speed_h_acceleration;
 	}
 
 	// force down on press
@@ -101,17 +111,18 @@ public class PlayerController : MonoBehaviour {
 	// Always update if the mouse button or Space key was pressed.
 	// So the game controller can know when button is pressed at title screen.
 	public void UpdateFrame() {
+		deltaTime = Time.deltaTime;
 		if (!is_dead && is_input_enabled) {
 			UpdateHorizontalSpeed();
 			UpdateVerticalSpeed();
 			UpdateCollide();
 			if (is_force) {
-				rb.AddRelativeForce (Vector2.up * speed_v * Time.deltaTime * force_multiplier );
-				rb.AddRelativeForce (Vector2.right * speed_h * Time.deltaTime * force_multiplier );
+				rb.AddRelativeForce (Vector2.up * speed_v * deltaTime * force_multiplier );
+				rb.AddRelativeForce (Vector2.right * speed_h * deltaTime * force_multiplier );
 			}
 			else {
-				transform.Translate ( Vector2.up * speed_v * Time.deltaTime );
-				transform.Translate ( Vector2.right * speed_h * Time.deltaTime );
+				transform.Translate ( Vector2.up * speed_v * deltaTime );
+				transform.Translate ( Vector2.right * speed_h * deltaTime );
 			}
 		}
 	}

@@ -17,14 +17,24 @@ DONE
 	David H hits obstacle and notices penalty.
 	Variable to play sound when hit obstacle, air, ground, dead.
 	David H challenged by extreme obstacles (+Corey)
+	David H challenged by ramp up of 4 levels.
+	David H challenged by moderate obstacles (+Corey)
+	Nitiam played a few times.
 
 TODO
 
-	David H challenged by moderate obstacles (+Corey)
-	David H challenged by ramp up of obstacles.
+	Player can move left and right.
+	Obstacle, air, ground response satisfies us.
+	Nitiam sees first level without second overlapping.
+	Nitiam challenged but not overwhelmed.
+		David H challenged by ramp up of 6 levels.
+	Nitiam reads text in front.
+	Nitiam reads large distance whole number starting from 0.
+		End screen shows score in text.
+	Nitiam recognizes obstacles.
+	Nitiam recognizes wave immediately.
+	Nitiam recognizes surfer immediately.
 	Playtest
-	Obstacle, air, ground response.
-	Editing levels
 	David H quickly learns that press goes down.
 		Second tutorial screen.
 		Stay ahead of the wave.
