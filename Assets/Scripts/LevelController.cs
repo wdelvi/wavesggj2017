@@ -60,6 +60,15 @@ public class LevelController
 
 	private void CreateInitialHand( )
 	{
-		GameObject chunkOne = ( GameObject ) GameObject.Instantiate ( this.DrawLevelCard() );
+		GameObject chunkOne = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
+		GameObject chunkTwo = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
+		GameObject chunkThree = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
+		levelChunkHand.Add ( chunkOne );
+		levelChunkHand.Add ( chunkTwo );
+		levelChunkHand.Add ( chunkThree );
+		 
+		chunkOne.transform.localPosition = new Vector3 ( chunkTwo.transform.position.x - chunkTwo.GetComponent<Renderer>().bounds.size.x, 0, 0 ); 
+		chunkTwo.transform.localPosition = new Vector3 ( 0, 0, 0 );
+		chunkThree.transform.localPosition = new Vector3 ( chunkTwo.transform.position.x + chunkTwo.GetComponent<Renderer>().bounds.size.x, 0, 0 ); 
 	}
 }
