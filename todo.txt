@@ -1,0 +1,15 @@
+TODO
+
+Landscape
+Level editing and loading
+Artwork
+Animation
+	Wave
+Input
+	surfer physics
+		one button
+
+	Wave model
+Distance or time indicator
+Finger tap instruction
+	at wave
