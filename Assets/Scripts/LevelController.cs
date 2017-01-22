@@ -106,8 +106,9 @@ public class LevelController
 		foreach (Transform child in newLevelChunk.transform) {
 			if (child.tag == "Obstacle") {
 				Sprite newSprite = obstacles[(int)Mathf.Floor(Random.Range(0, obstacles.Length))];
-				child.Find ("Sprite").GetComponent<SpriteRenderer> ().sprite = newSprite;
-				child.Find ("Sprite").GetComponent<SpriteRenderer> ().sortingOrder = -(int)(child.transform.position.y * 100);
+				GameObject spriteObject = child.Find ("Sprite").gameObject;
+				spriteObject.GetComponent<SpriteRenderer> ().sprite = newSprite;
+				setWorldZtoWorldY(spriteObject);
 			}
 		}
 
@@ -117,5 +118,15 @@ public class LevelController
 			this.levelChunkHand.Remove (oldLevelChunk);
 			UnityEngine.Object.Destroy (oldLevelChunk);
 		}
+	}
+
+	// Behind wave.
+	// Lower on screen in front.
+	// Set z position to y position.
+	public void setWorldZtoWorldY(GameObject spriteObject)
+	{
+		Vector3 world = spriteObject.transform.position;
+		world.z = world.y;
+		spriteObject.transform.position = world;
 	}
 }

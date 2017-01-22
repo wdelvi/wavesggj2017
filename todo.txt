@@ -59,10 +59,11 @@ DONE
 	Polish up and down sounds
 	Z-sort obstacles by vertical position.
 	Reset high score on app boot up with static variable, WebGL safe.
+	Polish wave crash:  wave covers screen.
+	Wave on top of all obstacles.
 
 TODO
 
-	Wave on top of all objects.
 	Z-sort player by vertical position every frame.
 	Build WebGL:  720x480.
 	Host on GitHub or FineGameDesign.com
@@ -78,8 +79,7 @@ TODO
 		If in air, vertical force down -1.  Was -5.
 		Remove deltaTime from horizontal speed calculation and compensate.
 	Playtest
-	Polish wave crash:  wave covers screen.
-		Delay repeat instruction.
+	Die:  Delay repeat instruction.
 	Polish intro:  Wave enters.
 	Playtest
 	Submit
