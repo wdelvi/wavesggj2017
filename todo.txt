@@ -32,30 +32,35 @@ DONE
 		David H challenged by ramp up of 6 levels.
 	Corey feels natural back and up.
 	Air and Ground does not slow down Marc so much.
+	Nitiam and Marc recognize wave immediately.
+	Marc: Wave collider edge.
+	Animation
+		Wave
+	Particle system
+	Damien plays a few times until 250m.
 
 TODO
 
-	Nitiam and Marc recognize wave immediately.
+	Artwork
+	Nitiam, Marc, Damien recognize surfer accelerate down and decelerate up.
+		Player is going down, animate down.
+			Particle trail on player
+		Player is going up, animate up.
 	Nitiam and Marc recognize surfer immediately.
-	Nitiam and Marc recognize surfer accelerate down and decelerate up.
 	Marc hears ground sound.
-	Marc: Wave collider edge.
 	Nitiam recognizes obstacles.
 	Playtest
 	David H quickly learns that press goes down.
 		Second tutorial screen.
 		Stay ahead of the wave.
 	Playtest
-	Artwork
+	Polish sounds
 	Playtest
 	Submit
 	Playtest
 	Finger tap instruction
 		at wave
 	Playtest
-	Animation
-		Wave
-	Particle system
 	Playtest
 	Font
 	Music
