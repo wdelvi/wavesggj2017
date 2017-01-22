@@ -10,9 +10,9 @@ Engineers:  Will Delventhal, Ethan Kennerly, River Liu.
 
 Artist:  Corey Jackson.
 
-Music:  Colin Andrew Grant
+Musician:  Colin Andrew Grant.
 
-Playtesters:  David H, Nityam, Marc, Damien, Avi, and more at Google Launchpad.
+Playtesters:  David H, Nityam, Marc, Damien, Avi, Cameron, Guan, and more at Google Launchpad.
 
 Theme:  Waves.
 
