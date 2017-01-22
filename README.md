@@ -1,17 +1,19 @@
 # Surfing the Great Wave
 
-Play now:
+Play now from our website:
 
-[Android](./Release/surfingthegreatwave.apk)
+[Android](https://wdelvi.github.io/wavesggj2017/play/surfingthegreatwave.apk)
 
-[WebGL](./Release/index.html)
+[WebGL](https://wdelvi.github.io/wavesggj2017/play/webgl/index.html)
 
-Engineers:  Will Delventhal, Ethan Kennerly, River Liu(sp?)
+Engineers:  Will Delventhal, Ethan Kennerly, River Liu.
 
-Artist:  Corey (last name?)
+Artist:  Corey Jackson.
 
 Playtesters:  David H, Nitiam, Marc, Damien, Avi, and more at Google Launchpad.
 
-Theme:  Waves
+Theme:  Waves.
 
-Global Game Jam 2017
+Global Game Jam 2017 Page:
+
+[http://globalgamejam.org/2017/games/surfing-great-wave](http://globalgamejam.org/2017/games/surfing-great-wave)
