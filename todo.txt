@@ -80,10 +80,13 @@ DONE
 		Blend distance and player world x.
 		Wave doesn't start at random place.
 	Nityam plays middle levels a little more difficult.
+	Collin plays.
+	Cameron plays.
+	Guan plays.
+	Guan reads "Hold to speed up" in water and sky.
 
 TODO
 
-	Playtest
 	Polish wave crash sound as louder and longer.
 	Nityam sees first obstacles sooner.
 	Playtest
