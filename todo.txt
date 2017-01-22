@@ -38,32 +38,34 @@ DONE
 		Wave
 	Particle system
 	Damien plays a few times until 250m.
-
-TODO
-
-	Artwork
+	Another person plays.
+	Tim plays.
 	Nitiam, Marc, Damien recognize surfer accelerate down and decelerate up.
 		Player is going down, animate down.
 			Particle trail on player
 		Player is going up, animate up.
-	Nitiam and Marc recognize surfer immediately.
-	Marc hears ground sound.
-	Tim sees score.
-	Nitiam recognizes obstacles.
-	Playtest
 	David H quickly learns that press goes down.
 		Second tutorial screen.
 		Stay ahead of the wave.
+	Marc hears ground sound.
+	Tim sees score on dark text.
+
+TODO
+
+	Artwork
+	Nitiam and Marc recognize surfer immediately.
+	Nitiam recognizes obstacles.
 	Playtest
 	Polish sounds
+	Polish particle
 	Playtest
-	Submit
 	Ramp up level difficulty for Tim.
 	Playtest
+	Submit
 	Finger tap instruction
 		at wave
 	Playtest
-	Playtest
 	Font
+	Particle around obstacle.
 	Music
 	Jumping Effect - No input while in air, but allow movement into space
