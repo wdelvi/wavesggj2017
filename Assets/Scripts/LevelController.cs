@@ -14,6 +14,9 @@ public class LevelController
 	//All of our options starting shuffled and removing as used
 	public List<GameObject> levelChunkDeck;
 
+	//All of our options for obstacles
+	public List<GameObject> obstacleLibrary;
+
 	//The current chunks that are instantiated into the game
 	public List<GameObject> levelChunkHand;
 	public int handLength = 3;
@@ -97,6 +100,14 @@ public class LevelController
 		newLevelChunk.transform.localPosition = new Vector3 ( newChunkX, 0, 0 );
 		newLevelChunk.transform.parent = this.levelChunkHolder.transform;
 		this.levelChunkHand.Add ( newLevelChunk );
+
+		foreach (Transform child in newLevelChunk.transform) {
+			if (child.tag == "DefaultObstacle") {
+				GameObject prefab = obstacleLibrary[(int)Mathf.Floor(Random.Range(0, obstacleLibrary.Count))];
+				GameObject newObject = (GameObject)GameObject.Instantiate (prefab, child.position, child.rotation, child.parent);
+				GameObject.Destroy(child.gameObject);
+			}
+		}
 
 		if ( this.levelChunkHand.Count > handLength )
 		{
