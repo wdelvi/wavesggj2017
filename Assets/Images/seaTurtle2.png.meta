@@ -1,11 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Images/seaTurtle2.png.meta
 guid: 9983cd612ae1544c2873eb1d31253489
-timeCreated: 1485062669
-licenseType: Free
-=======
-guid: 2b34122421492d546918de2344aea0bb
->>>>>>> 3097a2bcc20107eacc939b1bcbcfbaf493bd14b7:Assets/Images/seaTurtle.png.meta
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
@@ -63,6 +57,14 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
     maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
