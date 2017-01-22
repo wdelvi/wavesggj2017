@@ -27,16 +27,19 @@ DONE
 		End screen shows score in text.
 	Nitiam sees first level without second overlapping.
 	Sound
+	Playtest with Marc.
 
 TODO
 
-	Playtest
+	Nitiam and Marc recognize wave immediately.
+	Nitiam and Marc recognize surfer immediately.
+	Nitiam and Marc recognize surfer accelerate down and decelerate up.
+	Marc: Air and Ground does not slow down so much.
+	Marc: Wave collider edge.
 	Nitiam challenged but not overwhelmed.
 		David H challenged by ramp up of 6 levels.
 	Playtest
 	Nitiam recognizes obstacles.
-	Nitiam recognizes wave immediately.
-	Nitiam recognizes surfer immediately.
 	Playtest
 	David H quickly learns that press goes down.
 		Second tutorial screen.
