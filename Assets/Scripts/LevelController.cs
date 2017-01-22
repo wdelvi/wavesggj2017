@@ -102,9 +102,10 @@ public class LevelController
 		this.levelChunkHand.Add ( newLevelChunk );
 
 		foreach (Transform child in newLevelChunk.transform) {
-			if (child.tag == "DefaultObstacle") {
+			if (child.tag == "Obstacle") {
 				Sprite newSprite = obstacleLibrary[(int)Mathf.Floor(Random.Range(0, obstacleLibrary.Count))];
 				child.Find ("Sprite").GetComponent<SpriteRenderer> ().sprite = newSprite;
+				child.localPosition = new Vector3(child.localPosition.x, child.localPosition.y, child.localPosition.y + 1);
 			}
 		}
 
