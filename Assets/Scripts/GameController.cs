@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -77,7 +78,12 @@ public class GameController : MonoBehaviour
 		this.PauseGame ();
 		this.gameActive = false;
 		this.deathUI.gameObject.SetActive (true);
-		this.deathUI.text = "You surfed " + distanceWhole + "m. Tap to restart.";
+		int highest_score = this.GetHighestScore ();
+		if (distanceWhole > highest_score) {
+			this.UpdateHighestScore(distanceWhole);
+			highest_score = distanceWhole;
+		}
+		this.deathUI.text = "You surfed " + distanceWhole + "m. Best record is " + highest_score + "m. Tap to restart.";
 		this.inputBlockTimer = 0;
 		this.objectsToMove.Remove (Camera.main.gameObject);
 
@@ -281,5 +287,17 @@ public class GameController : MonoBehaviour
 				this.UnpauseGame ();
 			}
 		}
+	}
+
+	private void UpdateHighestScore(int score)
+	{
+		System.IO.File.WriteAllText("Assets/HighestScore.txt", score.ToString());
+	}
+
+	private int GetHighestScore()
+	{
+		int highest_score = 0;
+		int.TryParse(System.IO.File.ReadAllText("Assets/HighestScore.txt"), out highest_score);
+		return highest_score;
 	}
 }
