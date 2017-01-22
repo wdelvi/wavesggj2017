@@ -199,8 +199,8 @@ public class GameController : MonoBehaviour
 			newChunkX = this.waveBackgrounds [this.waveBackgrounds.Count - 1].transform.Find ("Edge").transform.position.x;
 		}
 
-		newBackgroundChunk.transform.position = new Vector3 ( newChunkX, -1, 0);
 		newBackgroundChunk.transform.parent = this.waveChunkParent.transform;
+		newBackgroundChunk.transform.localPosition = new Vector3 ( newChunkX, -3, 0);
 		this.waveBackgrounds.Add ( newBackgroundChunk );
 
 		if ( this.waveBackgrounds.Count > this.numberOfBackgroundChunks )
