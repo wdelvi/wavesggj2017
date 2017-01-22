@@ -56,6 +56,11 @@ public class PlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 		particle.enableEmission = false;
+		foreach (Transform child in transform) {
+			if (child.gameObject.name == "Up" || child.gameObject.name == "Down") {
+				child.GetComponent<SpriteRenderer> ().sortingOrder = -(int)(child.transform.position.y * 100);
+			}
+		}
 	}
 
 	private void UpdateAnimation() {
