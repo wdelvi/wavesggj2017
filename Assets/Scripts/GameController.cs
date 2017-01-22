@@ -64,7 +64,7 @@ public class GameController : MonoBehaviour
 		distanceWhole = 0;
 		this.gameStartWavePosition = this.wave.transform.localPosition;
 		this.waveTargetPosition = Vector3.zero;
-		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+		playerController = player.GetComponent<PlayerController>();
 		playerController.Setup();
 		this.audioSources = this.GetComponents<AudioSource> ();
 		this.levelController.Setup();
@@ -145,6 +145,7 @@ public class GameController : MonoBehaviour
 			this.UpdateWavePosition ();
 		}
 
+		levelController.setWorldZtoWorldY(player);
 		this.lastInput = inputDown;
 	}
 
