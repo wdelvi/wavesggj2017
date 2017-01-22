@@ -51,12 +51,12 @@ DONE
 	Tim sees score on dark text.
 	Polish particle
 	Josh playtests
+	Nitiam and Marc, Josh recognize surfer immediately.
 
 TODO
 
 	Josh reads text.
 	Artwork
-	Nitiam and Marc, Josh recognize surfer immediately.
 	Nitiam, Josh recognizes obstacles.
 	Polish sounds
 	Playtest
