@@ -88,7 +88,7 @@ public class LevelController
 	{
 		GameObject newLevelChunk = (GameObject)GameObject.Instantiate ( this.DrawLevelCard () );
 
-		float newChunkX = 8;
+		float newChunkX = 40;
 		if (this.levelChunkHand.Count >= 1)
 		{
 			newChunkX = this.levelChunkHand [this.levelChunkHand.Count - 1].transform.Find ("Bounds").transform.position.x;
