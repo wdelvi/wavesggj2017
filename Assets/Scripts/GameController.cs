@@ -23,8 +23,9 @@ public class GameController : MonoBehaviour
 	public Text distanceUI;
 	public Text deathUI;
 
-	public List<AudioClip> downSounds;
-	public List<AudioClip> upSounds;
+	public List<AudioClip> speedUpStart;
+	public List<AudioClip> speedUpSustain;
+	public List<AudioClip> speedUpEnd;
 	public List<AudioClip> wipeoutSounds;
 	public List<AudioClip> hitSounds;
 	public List<AudioClip> airSounds;
@@ -134,11 +135,15 @@ public class GameController : MonoBehaviour
 		}
 		else if (newInput == true && oldInput == false)
 		{
-			this.PlayRandomSound ( this.upSounds, true );	
+			this.PlayRandomSound ( this.speedUpStart, true );	
+		}
+		else if (newInput == true && oldInput == true)
+		{
+			this.PlayRandomSound ( this.speedUpSustain, false );	
 		}
 		else if (newInput == false && oldInput == true)
 		{
-			this.PlayRandomSound ( this.downSounds, true );
+			this.PlayRandomSound ( this.speedUpEnd, true );
 		}
 		else if (this.playerController.is_collide_now)
 		{
