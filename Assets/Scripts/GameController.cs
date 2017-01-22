@@ -30,6 +30,9 @@ public class GameController : MonoBehaviour
 	public List<AudioClip> airSounds;
 	public List<AudioClip> groundSounds;
 
+	public GameObject waveChunkPrefab;
+	public GameObject waveChunkParent;
+
 	[SerializeField]
 	private LevelController levelController = new LevelController();
 	private bool gameActive = true;
@@ -37,6 +40,8 @@ public class GameController : MonoBehaviour
 	private bool lastInput = false;
 	private AudioSource sound;
 	private float inputBlockTimer;
+	private List<GameObject> waveBackgrounds;
+	private int numberOfBackgroundChunks = 5;
 		
 	// Use this for initialization
 	private void Start () 
@@ -44,12 +49,12 @@ public class GameController : MonoBehaviour
 		this.distanceUI.text = "";
 		distance = 0.0f;
 		distanceWhole = 0;
-		this.deathUI.gameObject.SetActive(false);
 		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 		playerController.Setup();
 		this.sound = this.GetComponent<AudioSource> ();
 		this.levelController.Setup();
 		this.inputBlockTimer = this.timeToBlockInputAfterDeath;
+		this.CreateInitialWaveBackgroundChunks ();
 	}
 
 	private void EndGame()
@@ -88,6 +93,7 @@ public class GameController : MonoBehaviour
 			this.UpdateFollowObjects ();
 			this.UpdateUI ();
 			this.UpdateSounds ( inputDown, lastInput );
+			this.UpdateWaveBackgrounds ();
 			this.levelController.Update ();
 
 			if ( this.playerController.is_dead )
@@ -164,6 +170,45 @@ public class GameController : MonoBehaviour
 	{
 		distanceWhole = (int)(Mathf.Round(distance));
 		this.distanceUI.text = distanceWhole + " m";  
+	}
+
+	private void UpdateWaveBackgrounds()
+	{
+		if (this.waveBackgrounds [2].transform.localPosition.x < Camera.main.transform.localPosition.x)
+		{
+			CreateWaveBackgroundChunk ();
+		}
+	}
+
+	private void CreateInitialWaveBackgroundChunks()
+	{
+		this.waveBackgrounds = new List<GameObject> ();
+		for (int i = 0; i < numberOfBackgroundChunks; i++)
+		{
+			this.CreateWaveBackgroundChunk ();
+		}
+	}
+
+	private void CreateWaveBackgroundChunk()
+	{
+		GameObject newBackgroundChunk = (GameObject)GameObject.Instantiate ( this.waveChunkPrefab );
+
+		float newChunkX = -16;
+		if ( this.waveBackgrounds.Count >= 1 )
+		{
+			newChunkX = this.waveBackgrounds [this.waveBackgrounds.Count - 1].transform.Find ("Edge").transform.position.x;
+		}
+
+		newBackgroundChunk.transform.position = new Vector3 ( newChunkX, -1, 0);
+		newBackgroundChunk.transform.parent = this.waveChunkParent.transform;
+		this.waveBackgrounds.Add ( newBackgroundChunk );
+
+		if ( this.waveBackgrounds.Count > this.numberOfBackgroundChunks )
+		{
+			GameObject oldBackgroundChunk = this.waveBackgrounds [0];
+			this.waveBackgrounds.Remove (oldBackgroundChunk);
+			UnityEngine.Object.Destroy (oldBackgroundChunk);
+		}
 	}
 
 	private void InputPressed()
