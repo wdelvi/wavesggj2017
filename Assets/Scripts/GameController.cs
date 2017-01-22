@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
 
 	public Text distanceUI;
 	public Text deathUI;
+	public GameObject titleUI;
 
 	public List<AudioClip> speedUpStart;
 	public List<AudioClip> speedUpSustain;
@@ -71,6 +72,7 @@ public class GameController : MonoBehaviour
 		this.inputBlockTimer = this.timeToBlockInputAfterDeath;
 		this.CreateInitialWaveBackgroundChunks ();
 		this.UpdateWavePosition ();
+		this.titleUI.SetActive (true);
 		this.deathUI.gameObject.SetActive (false);
 	}
 
@@ -78,6 +80,7 @@ public class GameController : MonoBehaviour
 	{
 		this.PauseGame ();
 		this.gameActive = false;
+		this.titleUI.SetActive (false);
 		this.deathUI.gameObject.SetActive (true);
 		highest_score = this.GetHighestScore ();
 		if (distanceWhole > highest_score) {
