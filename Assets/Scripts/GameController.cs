@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour
 	public Text deathUI;
 	public GameObject titleUI;
 
+	public GameObject environment;
+
 	public List<AudioClip> speedUpStart;
 	public List<AudioClip> speedUpSustain;
 	public List<AudioClip> speedUpEnd;
@@ -58,7 +60,6 @@ public class GameController : MonoBehaviour
 	private Vector3 lerpStartWavePosition;
 	private float waveLerpLength;
 	private float waveLerpStartTime;
-
 		
 	// Use this for initialization
 	private void Start () 
@@ -128,7 +129,7 @@ public class GameController : MonoBehaviour
 			this.UpdateUI ();
 			this.UpdateSounds ( inputDown, lastInput );
 			this.UpdateWaveBackgrounds ();
-			this.UpdateWavePosition();
+			this.UpdateCameraOffset ();
 			this.levelController.Update ();
 
 			if ( this.playerController.is_dead )
@@ -276,6 +277,20 @@ public class GameController : MonoBehaviour
 		else
 		{
 			this.wave.transform.localPosition = Vector3.Lerp( this.lerpStartWavePosition, this.waveTargetPosition, ( Time.time - this.waveLerpStartTime ) / this.waveLerpLength );
+		}
+	}
+
+	private void UpdateCameraOffset()
+	{
+		float cameraOffset = (this.player.transform.localPosition.x - Camera.main.transform.localPosition.x) / 20;
+		Vector3 newCameraPosition = Camera.main.transform.localPosition;
+
+		if (cameraOffset > 0 && Camera.main.transform.localPosition.x - this.environment.transform.localPosition.x < 12
+		   || cameraOffset < 0 && Camera.main.transform.localPosition.x - this.environment.transform.localPosition.x > -5)
+		{
+
+			newCameraPosition.x += cameraOffset;
+			Camera.main.transform.localPosition = newCameraPosition;
 		}
 	}
 
