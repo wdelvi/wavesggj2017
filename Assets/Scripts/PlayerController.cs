@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D (Collision2D other) {
-		if (other.gameObject.tag == "Obstacle") {
+		if (other.gameObject.tag == "Obstacle" || other.gameObject.tag == "ObstacleTall") {
 			Debug.Log ("Hit obstacle");
 			is_collide_next = true;
 		}

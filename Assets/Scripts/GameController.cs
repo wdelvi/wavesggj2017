@@ -145,7 +145,7 @@ public class GameController : MonoBehaviour
 			this.UpdateWavePosition ();
 		}
 
-		levelController.setWorldZtoWorldY(player);
+		levelController.SetWorldZtoWorldY(player);
 		this.lastInput = inputDown;
 	}
 

@@ -21,11 +21,13 @@ public class LevelController
 	public int handStart = -1;
 
 	private Sprite[] obstacles;
+	private Sprite[] obstaclesTall;
 
 	public void Setup () 
 	{
 		handStart = -1;
-		obstacles = Resources.LoadAll<Sprite> ("Obstacles");
+		this.obstacles = Resources.LoadAll<Sprite> ("Obstacles");
+		this.obstaclesTall = Resources.LoadAll<Sprite> ("obstaclesTall");
 
 		this.levelChunkHand = new List<GameObject>();
 
@@ -103,14 +105,7 @@ public class LevelController
 		newLevelChunk.transform.parent = this.levelChunkHolder.transform;
 		this.levelChunkHand.Add ( newLevelChunk );
 
-		foreach (Transform child in newLevelChunk.transform) {
-			if (child.tag == "Obstacle") {
-				Sprite newSprite = obstacles[(int)Mathf.Floor(Random.Range(0, obstacles.Length))];
-				GameObject spriteObject = child.Find ("Sprite").gameObject;
-				spriteObject.GetComponent<SpriteRenderer> ().sprite = newSprite;
-				setWorldZtoWorldY(spriteObject);
-			}
-		}
+		this.ReplacePlaceholderObstacles (newLevelChunk); 
 
 		if ( this.levelChunkHand.Count > handLength )
 		{
@@ -123,10 +118,33 @@ public class LevelController
 	// Behind wave.
 	// Lower on screen in front.
 	// Set z position to y position.
-	public void setWorldZtoWorldY(GameObject spriteObject)
+	public void SetWorldZtoWorldY(GameObject spriteObject)
 	{
 		Vector3 world = spriteObject.transform.position;
 		world.z = world.y;
 		spriteObject.transform.position = world;
+	}
+
+	private void ReplacePlaceholderObstacles( GameObject levelChunk )
+	{
+		foreach ( Transform child in levelChunk.transform ) 
+		{
+			if (child.tag == "Obstacle")
+			{
+				this.ReplaceTransformObjectSpriteWithRandom (child, this.obstacles);
+			}
+			else if (child.tag == "ObstacleTall")
+			{
+				this.ReplaceTransformObjectSpriteWithRandom (child, this.obstaclesTall);	
+			}
+		}
+	}
+
+	private void ReplaceTransformObjectSpriteWithRandom( Transform toReplace, Sprite[] spriteArray )
+	{
+		Sprite newSprite = spriteArray [ (int)Mathf.Floor (Random.Range (0, spriteArray.Length)) ];
+		GameObject spriteObject = toReplace.Find ("Sprite").gameObject;
+		spriteObject.GetComponent<SpriteRenderer> ().sprite = newSprite;
+		this.SetWorldZtoWorldY (spriteObject);
 	}
 }
