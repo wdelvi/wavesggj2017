@@ -48,6 +48,7 @@ TODO
 		Player is going up, animate up.
 	Nitiam and Marc recognize surfer immediately.
 	Marc hears ground sound.
+	Tim sees score.
 	Nitiam recognizes obstacles.
 	Playtest
 	David H quickly learns that press goes down.
@@ -57,6 +58,7 @@ TODO
 	Polish sounds
 	Playtest
 	Submit
+	Ramp up level difficulty for Tim.
 	Playtest
 	Finger tap instruction
 		at wave
