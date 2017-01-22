@@ -165,18 +165,6 @@ public class GameController : MonoBehaviour
 		{
 			this.PlayRandomSound ( this.wipeoutSounds, true, 0 );
 		}
-		else if (newInput == true && oldInput == false)
-		{
-			this.PlayRandomSound ( this.speedUpStart, true, 1 );	
-		}
-		else if (newInput == true && oldInput == true)
-		{
-			this.PlayRandomSound ( this.speedUpSustain, false, 1 );	
-		}
-		else if (newInput == false && oldInput == true)
-		{
-			this.PlayRandomSound ( this.speedUpEnd, true, 1 );
-		}
 		else if (this.playerController.is_collide_now)
 		{
 			this.PlayRandomSound ( this.hitSounds, true, 0 );
@@ -189,16 +177,29 @@ public class GameController : MonoBehaviour
 		{
 			this.PlayRandomSound ( this.groundSounds, false, 0 );
 		}
+
+		if (newInput == true && oldInput == false)
+		{
+			this.PlayRandomSound ( this.speedUpStart, true, 1 );	
+		}
+		else if (newInput == true && oldInput == true)
+		{
+			this.PlayRandomSound ( this.speedUpSustain, false, 1 );	
+		}
+		else if (newInput == false && oldInput == true)
+		{
+			this.PlayRandomSound ( this.speedUpEnd, true, 1 );
+		}
 	}
 
 	private void PlayRandomSound( List<AudioClip> soundClips, bool interuptSounds, int audioSourceIndex )
 	{
-		if ( soundClips.Count > 0)
+		if ( soundClips.Count > 0 )
 		{
-			if (!this.audioSources[audioSourceIndex].isPlaying || interuptSounds)
+			if ( !this.audioSources[ audioSourceIndex ].isPlaying || interuptSounds )
 			{
 				AudioClip clipToPlay = soundClips [Random.Range (0, soundClips.Count - 1)]; 
-				this.audioSources[audioSourceIndex].clip = clipToPlay;
+				this.audioSources[audioSourceIndex].clip = clipToPlay; 
 				this.audioSources[audioSourceIndex].Play ();
 			}
 		}
