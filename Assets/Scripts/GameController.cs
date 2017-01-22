@@ -85,6 +85,12 @@ public class GameController : MonoBehaviour
 		}
 		this.deathUI.text = "You surfed " + distanceWhole + "m. Best record is " + highest_score + "m. Tap to restart.";
 		this.inputBlockTimer = 0;
+		this.objectsToMove.Remove (Camera.main.gameObject);
+
+		this.waveTargetPosition = new Vector3 ( 26.5f, this.wave.transform.localPosition.y, this.wave.transform.localPosition.z ); 
+		this.lerpStartWavePosition = this.wave.transform.localPosition;
+		this.waveLerpLength = 3.0f;
+		this.waveLerpStartTime = Time.time;
 	}
 
 	private void RestartGame()
@@ -115,7 +121,7 @@ public class GameController : MonoBehaviour
 			this.UpdateUI ();
 			this.UpdateSounds ( inputDown, lastInput );
 			this.UpdateWaveBackgrounds ();
-			this.UpdateWavePosition ();
+			this.UpdateWavePosition();
 			this.levelController.Update ();
 
 			if ( this.playerController.is_dead )
@@ -131,6 +137,11 @@ public class GameController : MonoBehaviour
 			{
 				this.InputPressed ();
 			}
+		}
+
+		if ( !this.gameActive && this.gamePaused )
+		{
+			this.UpdateWavePosition ();
 		}
 
 		this.lastInput = inputDown;
@@ -249,7 +260,7 @@ public class GameController : MonoBehaviour
 			this.waveLerpStartTime = Time.time;
 		}
 
-		if ( this.wave.transform.localPosition == this.waveTargetPosition)
+		if ( this.wave.transform.localPosition == this.waveTargetPosition && this.gameActive)
 		{
 			this.waveTargetPosition = Vector3.zero;
 		}
