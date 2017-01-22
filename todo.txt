@@ -84,6 +84,7 @@ DONE
 	Cameron plays.
 	Guan plays.
 	Guan reads "Hold to speed up" in water and sky.
+	When collide, emit crest particles.
 
 TODO
 
@@ -95,7 +96,6 @@ TODO
 	Polish intro:  Wave enters.
 	Playtest
 	Submit
-	When collide, emit crest particles.
 	When surf up, small crest particles.
 	Barrel riders not at top of wave.
 	Animate finger tap instruction

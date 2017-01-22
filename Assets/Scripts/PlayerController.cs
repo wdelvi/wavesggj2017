@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 	public float speed_h_on_ground = -3.5f;
 	public float speed_h_down_add = 5.0f;
 	public float speed_h_down_add_force = 2.0f;
-	public float speed_h_collide = -256.0f;
+	public float speed_h_collide = -128.0f;
 	public float speed_h_acceleration = 0.0f;
 	public float speed_h_jerk_down = 4.0f;
 	public float speed_h_jerk_up = -0.5f;
@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour {
 
 	public ParticleSystem particle;
 	public ParticleSystem particleOnGround;
+	public float particleOnGroundOffTime = -1.0f;
+	public float particleOnGroundDuration = 0.25f;
 
 	// Use this for initialization
 	public void Setup() {
@@ -150,6 +152,13 @@ public class PlayerController : MonoBehaviour {
 		if (is_collide_now)
 		{
 			speed_h += speed_h_collide;
+			particleOnGround.enableEmission = true;
+			particleOnGroundOffTime = Time.time + particleOnGroundDuration;
+		}
+		if (0.0f < particleOnGroundOffTime && particleOnGroundOffTime <= Time.time)
+		{
+			particleOnGroundOffTime = -1.0f;
+			particleOnGround.enableEmission = false;
 		}
 	}
 
