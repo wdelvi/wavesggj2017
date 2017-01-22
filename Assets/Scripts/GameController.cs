@@ -33,6 +33,9 @@ public class GameController : MonoBehaviour
 
 	public GameObject waveChunkPrefab;
 	public GameObject waveChunkParent;
+	public GameObject wave;
+	public float maxWaveLerpTime = 15.0f;
+	public float minWaveLerpTime = 5.0f;
 
 	[SerializeField]
 	private LevelController levelController = new LevelController();
@@ -43,6 +46,13 @@ public class GameController : MonoBehaviour
 	private float inputBlockTimer;
 	private List<GameObject> waveBackgrounds;
 	private int numberOfBackgroundChunks = 5;
+
+	private Vector3 waveTargetPosition;
+	private Vector3 gameStartWavePosition;
+	private Vector3 lerpStartWavePosition;
+	private float waveLerpLength;
+	private float waveLerpStartTime;
+
 		
 	// Use this for initialization
 	private void Start () 
@@ -50,12 +60,15 @@ public class GameController : MonoBehaviour
 		this.distanceUI.text = "";
 		distance = 0.0f;
 		distanceWhole = 0;
+		this.gameStartWavePosition = this.wave.transform.localPosition;
+		this.waveTargetPosition = Vector3.zero;
 		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 		playerController.Setup();
 		this.audioSources = this.GetComponents<AudioSource> ();
 		this.levelController.Setup();
 		this.inputBlockTimer = this.timeToBlockInputAfterDeath;
 		this.CreateInitialWaveBackgroundChunks ();
+		this.UpdateWavePosition ();
 		this.deathUI.gameObject.SetActive (false);
 	}
 
@@ -96,6 +109,7 @@ public class GameController : MonoBehaviour
 			this.UpdateUI ();
 			this.UpdateSounds ( inputDown, lastInput );
 			this.UpdateWaveBackgrounds ();
+			this.UpdateWavePosition ();
 			this.levelController.Update ();
 
 			if ( this.playerController.is_dead )
@@ -214,6 +228,28 @@ public class GameController : MonoBehaviour
 			GameObject oldBackgroundChunk = this.waveBackgrounds [0];
 			this.waveBackgrounds.Remove (oldBackgroundChunk);
 			UnityEngine.Object.Destroy (oldBackgroundChunk);
+		}
+	}
+
+	private void UpdateWavePosition()
+	{
+		if ( this.waveTargetPosition == Vector3.zero )
+		{
+			Vector3 newWaveTarget = this.gameStartWavePosition;
+			newWaveTarget.x = newWaveTarget.x + Random.Range (-5.0f, 5.0f);
+			this.waveTargetPosition = newWaveTarget; 
+			this.waveLerpLength = Random.Range (this.minWaveLerpTime, this.maxWaveLerpTime);
+			this.lerpStartWavePosition = this.wave.transform.localPosition;
+			this.waveLerpStartTime = Time.time;
+		}
+
+		if ( this.wave.transform.localPosition == this.waveTargetPosition)
+		{
+			this.waveTargetPosition = Vector3.zero;
+		}
+		else
+		{
+			this.wave.transform.localPosition = Vector3.Lerp( this.lerpStartWavePosition, this.waveTargetPosition, ( Time.time - this.waveLerpStartTime ) / this.waveLerpLength );
 		}
 	}
 
