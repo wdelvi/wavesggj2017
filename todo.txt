@@ -53,23 +53,42 @@ DONE
 	Josh playtests
 	Nitiam and Marc, Josh recognize surfer immediately.
 	Nitiam, Josh recognize Corey's barrel riders.
+	Ramp up level difficulty for Tim and Josh.
+	Font
+	2 obstacle illustrations
+	Polish up and down sounds
+	Z-sort obstacles by vertical position.
+	Reset high score on app boot up with static variable, WebGL safe.
 
 TODO
 
+	Wave on top of all objects.
+	Z-sort player by vertical position every frame.
+	Build WebGL:  720x480.
+	Host on GitHub or FineGameDesign.com
+	Playtest WebGL.
 	Josh reads text.
-	Artwork
-	Polish sounds
-	Playtest
-	Ramp up level difficulty for Tim and Josh.
+		Instruction above wave.
+		Big distance HUD.
+	Polish wave crash sound as louder and longer.
 	Playtest
 	Wave approaches as player slows down.
+		Blend distance and player world x.
 	Jumping Effect - No input while in air, but allow movement into space for Will and Josh.
-	Submit
-	Z-sort by vertical position.
-	Barrel riders not at top of wave.
-	Finger tap instruction
-		at wave
+		If in air, vertical force down -1.  Was -5.
+		Remove deltaTime from horizontal speed calculation and compensate.
 	Playtest
-	Font
+	Polish wave crash:  wave covers screen.
+		Delay repeat instruction.
+	Polish intro:  Wave enters.
+	Playtest
+	Submit
+	When player at bottom of screen, emit crest particles in circle.
+	When collide, emit crest particles.
+	When surf up, small crest particles.
+	Barrel riders not at top of wave.
+	Animate finger tap instruction
+	Playtest
 	Particle around obstacle.
 	Music
+		Taiko drum

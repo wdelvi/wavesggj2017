@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour 
 {
+	public static int highest_score = 0;
 	//Speed at which objects are moved
 	public float gameSpeed;
 	public float distance;
@@ -78,7 +79,7 @@ public class GameController : MonoBehaviour
 		this.PauseGame ();
 		this.gameActive = false;
 		this.deathUI.gameObject.SetActive (true);
-		int highest_score = this.GetHighestScore ();
+		highest_score = this.GetHighestScore ();
 		if (distanceWhole > highest_score) {
 			this.UpdateHighestScore(distanceWhole);
 			highest_score = distanceWhole;
@@ -291,13 +292,11 @@ public class GameController : MonoBehaviour
 
 	private void UpdateHighestScore(int score)
 	{
-		System.IO.File.WriteAllText("Assets/HighestScore.txt", score.ToString());
+		highest_score = score;
 	}
 
 	private int GetHighestScore()
 	{
-		int highest_score = 0;
-		int.TryParse(System.IO.File.ReadAllText("Assets/HighestScore.txt"), out highest_score);
 		return highest_score;
 	}
 }
