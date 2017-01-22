@@ -70,6 +70,7 @@ TODO
 	Playtest WebGL.
 	Josh reads text.
 		Instruction above wave.
+		Best score in wave.
 		Big distance HUD.
 	Adjust 2-space building collider.
 	Polish wave crash sound as louder and longer.
