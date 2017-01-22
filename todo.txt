@@ -50,23 +50,24 @@ DONE
 	Marc hears ground sound.
 	Tim sees score on dark text.
 	Polish particle
+	Josh playtests
+	Nitiam and Marc, Josh recognize surfer immediately.
 
 TODO
 
+	Josh reads text.
 	Artwork
-	Nitiam and Marc recognize surfer immediately.
-	Nitiam recognizes obstacles.
-	Playtest
+	Nitiam, Josh recognizes obstacles.
 	Polish sounds
 	Playtest
-	Ramp up level difficulty for Tim.
+	Ramp up level difficulty for Tim and Josh.
 	Playtest
+	Wave approaches as player slows down.
+	Jumping Effect - No input while in air, but allow movement into space for Will and Josh.
 	Submit
 	Finger tap instruction
 		at wave
 	Playtest
-	Wave approaches as player slows down.
 	Font
 	Particle around obstacle.
 	Music
-	Jumping Effect - No input while in air, but allow movement into space
