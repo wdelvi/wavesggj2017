@@ -81,6 +81,7 @@ public class GameController : MonoBehaviour
 		int highest_score = this.GetHighestScore ();
 		if (distanceWhole > highest_score) {
 			this.UpdateHighestScore(distanceWhole);
+			highest_score = distanceWhole;
 		}
 		this.deathUI.text = "You surfed " + distanceWhole + "m. Best record is " + highest_score + "m. Tap to restart.";
 		this.inputBlockTimer = 0;
