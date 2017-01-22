@@ -61,10 +61,10 @@ DONE
 	Reset high score on app boot up with static variable, WebGL safe.
 	Polish wave crash:  wave covers screen.
 	Wave on top of all obstacles.
+	Z-sort player by vertical position every frame.
 
 TODO
 
-	Z-sort player by vertical position every frame.
 	Build WebGL:  720x480.
 	Host on GitHub or FineGameDesign.com
 	Playtest WebGL.
