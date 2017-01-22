@@ -282,16 +282,10 @@ public class GameController : MonoBehaviour
 
 	private void UpdateCameraOffset()
 	{
-		float cameraOffset = (this.player.transform.localPosition.x - Camera.main.transform.localPosition.x) / 20;
+		float cameraOffset = ( this.player.transform.localPosition.x - distance ) / 4;
 		Vector3 newCameraPosition = Camera.main.transform.localPosition;
-
-		if (cameraOffset > 0 && Camera.main.transform.localPosition.x - this.environment.transform.localPosition.x < 12
-		   || cameraOffset < 0 && Camera.main.transform.localPosition.x - this.environment.transform.localPosition.x > -5)
-		{
-
-			newCameraPosition.x += cameraOffset;
-			Camera.main.transform.localPosition = newCameraPosition;
-		}
+		newCameraPosition.x = cameraOffset + distance;
+		Camera.main.transform.localPosition = newCameraPosition;
 	}
 
 	private void InputPressed()
