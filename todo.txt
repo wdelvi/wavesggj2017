@@ -49,6 +49,7 @@ DONE
 		Stay ahead of the wave.
 	Marc hears ground sound.
 	Tim sees score on dark text.
+	Polish particle
 
 TODO
 
@@ -57,7 +58,6 @@ TODO
 	Nitiam recognizes obstacles.
 	Playtest
 	Polish sounds
-	Polish particle
 	Playtest
 	Ramp up level difficulty for Tim.
 	Playtest
@@ -65,6 +65,7 @@ TODO
 	Finger tap instruction
 		at wave
 	Playtest
+	Wave approaches as player slows down.
 	Font
 	Particle around obstacle.
 	Music

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: adb6022ed5016441188bb26821224cf4
+timeCreated: 1485057066
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Little Brushy Regular
+  fontNames:
+  - Little Brushy Regular
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
