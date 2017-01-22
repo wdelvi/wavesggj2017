@@ -76,13 +76,14 @@ DONE
 		When player at bottom of screen, emit crest particles in circle.
 	Music
 		Taiko drum
-
-TODO
-
 	Wave approaches as player slows down.
 		Blend distance and player world x.
 		Wave doesn't start at random place.
 	Nityam plays middle levels a little more difficult.
+
+TODO
+
+	Playtest
 	Polish wave crash sound as louder and longer.
 	Nityam sees first obstacles sooner.
 	Playtest
