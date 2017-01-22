@@ -78,10 +78,11 @@ public class GameController : MonoBehaviour
 		this.PauseGame ();
 		this.gameActive = false;
 		this.deathUI.gameObject.SetActive (true);
-		if (distanceWhole > this.GetHighestScore ()) {
+		int highest_score = this.GetHighestScore ();
+		if (distanceWhole > highest_score) {
 			this.UpdateHighestScore(distanceWhole);
 		}
-		this.deathUI.text = "You surfed " + distanceWhole + "m. Best record is " + this.GetHighestScore() + "m. Tap to restart.";
+		this.deathUI.text = "You surfed " + distanceWhole + "m. Best record is " + highest_score + "m. Tap to restart.";
 		this.inputBlockTimer = 0;
 	}
 
@@ -283,6 +284,8 @@ public class GameController : MonoBehaviour
 
 	private int GetHighestScore()
 	{
-		return int.Parse(System.IO.File.ReadAllText("Assets/HighestScore.txt"));
+		int highest_score = 0;
+		int.TryParse(System.IO.File.ReadAllText("Assets/HighestScore.txt"), out highest_score);
+		return highest_score;
 	}
 }
