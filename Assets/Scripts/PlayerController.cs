@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 	public float deltaTime;
 
 	public float speed_v_in_air = -0.25f; // -0.5f;  // -1.0f;
+	public float speed_v_death = -256.0f;
 	public float speed_wave = 5f;	// vertical speed of wave
 
 	public float speed_press = 10f;	// vertical speed of pressing
@@ -157,17 +158,18 @@ public class PlayerController : MonoBehaviour {
 	public void UpdateFrame() {
 		deltaTime = Time.deltaTime;
 		if (!is_dead && is_input_enabled) {
-			UpdateHorizontalSpeed();
-			UpdateVerticalSpeed();
-			UpdateCollide();
+			UpdateHorizontalSpeed ();
+			UpdateVerticalSpeed ();
+			UpdateCollide ();
 			if (is_force) {
-				rb.AddRelativeForce (Vector2.up * speed_v * deltaTime * force_multiplier );
-				rb.AddRelativeForce (Vector2.right * speed_h * deltaTime * force_multiplier );
+				rb.AddRelativeForce (Vector2.up * speed_v * deltaTime * force_multiplier);
+				rb.AddRelativeForce (Vector2.right * speed_h * deltaTime * force_multiplier);
+			} else {
+				transform.Translate (Vector2.up * speed_v * deltaTime);
+				transform.Translate (Vector2.right * speed_h * deltaTime);
 			}
-			else {
-				transform.Translate ( Vector2.up * speed_v * deltaTime );
-				transform.Translate ( Vector2.right * speed_h * deltaTime );
-			}
+		} else if (is_dead) {
+			rb.AddRelativeForce (Vector2.up * speed_v_death * deltaTime * force_multiplier);
 		}
 		is_down_before = is_down;
 		UpdateAnimation ();
