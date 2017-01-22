@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour {
 	public bool is_force = true;
 	public float force_multiplier = 200.0f;
 
+	public ParticleSystem particle;
+
 	// Use this for initialization
 	public void Setup() {
 		is_dead = false;
@@ -53,16 +55,19 @@ public class PlayerController : MonoBehaviour {
 		deltaTime = 0.0f;
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
+		particle.enableEmission = false;
 	}
 
 	private void UpdateAnimation() {
 		if (is_down) {
 			if (!anim.GetBool ("isDown")) {
 				anim.SetBool ("isDown", true);
+				particle.enableEmission = true;
 			}
 		} else {
 			if (anim.GetBool ("isDown")) {
 				anim.SetBool ("isDown", false);
+				particle.enableEmission = false;
 			}
 		}
 	}

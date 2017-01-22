@@ -55,6 +55,7 @@ public class GameController : MonoBehaviour
 		this.levelController.Setup();
 		this.inputBlockTimer = this.timeToBlockInputAfterDeath;
 		this.CreateInitialWaveBackgroundChunks ();
+		this.deathUI.gameObject.SetActive (false);
 	}
 
 	private void EndGame()
