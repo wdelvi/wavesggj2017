@@ -68,13 +68,13 @@ DONE
 	Adjust 2-space building collider.
 	Jumping Effect - No input while in air, but allow movement into space for Will and Josh.
 		If in air, vertical force down -0.25.  Was -5.
-
-TODO
-
 	Josh reads text.
 		Instruction above wave.
 		Best score in wave.
 		Big distance HUD.
+
+TODO
+
 	Nityam realizes bottom of screen is slower.
 	Nityam plays middle levels a little more difficult.
 	Polish wave crash sound as louder and longer.

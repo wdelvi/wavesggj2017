@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour
 			this.UpdateHighestScore(distanceWhole);
 			highest_score = distanceWhole;
 		}
-		this.deathUI.text = "You surfed " + distanceWhole + "m. Best record is " + highest_score + "m. Tap to restart.";
+		this.deathUI.text = "Best " + highest_score + " m\nTap to restart";
 		this.inputBlockTimer = 0;
 		this.objectsToMove.Remove (Camera.main.gameObject);
 
