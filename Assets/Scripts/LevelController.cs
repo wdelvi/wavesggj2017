@@ -15,7 +15,7 @@ public class LevelController
 	public List<GameObject> levelChunkDeck;
 
 	//All of our options for obstacles
-	public List<GameObject> obstacleLibrary;
+	public List<Sprite> obstacleLibrary;
 
 	//The current chunks that are instantiated into the game
 	public List<GameObject> levelChunkHand;
@@ -103,9 +103,8 @@ public class LevelController
 
 		foreach (Transform child in newLevelChunk.transform) {
 			if (child.tag == "DefaultObstacle") {
-				GameObject prefab = obstacleLibrary[(int)Mathf.Floor(Random.Range(0, obstacleLibrary.Count))];
-				GameObject newObject = (GameObject)GameObject.Instantiate (prefab, child.position, child.rotation, child.parent);
-				GameObject.Destroy(child.gameObject);
+				Sprite newSprite = obstacleLibrary[(int)Mathf.Floor(Random.Range(0, obstacleLibrary.Count))];
+				child.Find ("Sprite").GetComponent<SpriteRenderer> ().sprite = newSprite;
 			}
 		}
 
