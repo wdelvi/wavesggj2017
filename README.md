@@ -10,7 +10,7 @@ Engineers:  Will Delventhal, Ethan Kennerly, River Liu.
 
 Artist:  Corey Jackson.
 
-Playtesters:  David H, Nitiam, Marc, Damien, Avi, and more at Google Launchpad.
+Playtesters:  David H, Nityam, Marc, Damien, Avi, and more at Google Launchpad.
 
 Theme:  Waves.
 

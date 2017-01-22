@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 	public float speed_h_jerk_up = -0.5f;
 	public float deltaTime;
 
+	public float speed_v_in_air = -0.25f; // -0.5f;  // -1.0f;
 	public float speed_wave = 5f;	// vertical speed of wave
 
 	public float speed_press = 10f;	// vertical speed of pressing
@@ -126,7 +127,11 @@ public class PlayerController : MonoBehaviour {
 	// If out of bounds, return to bounds.
 	private void UpdateVerticalSpeed() {
 		if (is_in_air) {
-			speed_v = -speed_wave;
+			speed_v = speed_v_in_air;
+			if (is_down)
+			{
+				speed_v -= speed_press;
+			}
 		} else if (is_on_ground) {
 			speed_v = speed_wave;
 		} else if (is_in_wave && is_down) {

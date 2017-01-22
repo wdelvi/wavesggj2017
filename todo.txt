@@ -19,20 +19,20 @@ DONE
 	David H challenged by extreme obstacles (+Corey)
 	David H challenged by ramp up of 4 levels.
 	David H challenged by moderate obstacles (+Corey)
-	Nitiam played a few times.
+	Nityam played a few times.
 	Player can move left and right.
 	Obstacle, air, ground response satisfies us.
-	Nitiam reads text in front.
-	Nitiam reads large distance whole number starting from 0.
+	Nityam reads text in front.
+	Nityam reads large distance whole number starting from 0.
 		End screen shows score in text.
-	Nitiam sees first level without second overlapping.
+	Nityam sees first level without second overlapping.
 	Sound
 	Playtest with Marc.
-	Nitiam challenged but not overwhelmed.
+	Nityam challenged but not overwhelmed.
 		David H challenged by ramp up of 6 levels.
 	Corey feels natural back and up.
 	Air and Ground does not slow down Marc so much.
-	Nitiam and Marc recognize wave immediately.
+	Nityam and Marc recognize wave immediately.
 	Marc: Wave collider edge.
 	Animation
 		Wave
@@ -40,7 +40,7 @@ DONE
 	Damien plays a few times until 250m.
 	Another person plays.
 	Tim plays.
-	Nitiam, Marc, Damien recognize surfer accelerate down and decelerate up.
+	Nityam, Marc, Damien recognize surfer accelerate down and decelerate up.
 		Player is going down, animate down.
 			Particle trail on player
 		Player is going up, animate up.
@@ -51,8 +51,8 @@ DONE
 	Tim sees score on dark text.
 	Polish particle
 	Josh playtests
-	Nitiam and Marc, Josh recognize surfer immediately.
-	Nitiam, Josh recognize Corey's barrel riders.
+	Nityam and Marc, Josh recognize surfer immediately.
+	Nityam, Josh recognize Corey's barrel riders.
 	Ramp up level difficulty for Tim and Josh.
 	Font
 	2 obstacle illustrations
@@ -64,22 +64,25 @@ DONE
 	Z-sort player by vertical position every frame.
 	Host on GitHub or FineGameDesign.com
 	Build WebGL:  720x480.
+	Playtest WebGL.
+	Adjust 2-space building collider.
+	Jumping Effect - No input while in air, but allow movement into space for Will and Josh.
+		If in air, vertical force down -0.25.  Was -5.
 
 TODO
 
-	Playtest WebGL.
 	Josh reads text.
 		Instruction above wave.
 		Best score in wave.
 		Big distance HUD.
-	Adjust 2-space building collider.
+	Nityam realizes bottom of screen is slower.
+	Nityam plays middle levels a little more difficult.
 	Polish wave crash sound as louder and longer.
+	Nityam sees first obstacles sooner.
 	Playtest
 	Wave approaches as player slows down.
 		Blend distance and player world x.
-	Jumping Effect - No input while in air, but allow movement into space for Will and Josh.
-		If in air, vertical force down -1.  Was -5.
-		Remove deltaTime from horizontal speed calculation and compensate.
+	Remove deltaTime from horizontal speed calculation and compensate.
 	Playtest
 	Die:  Delay repeat instruction.
 	Polish intro:  Wave enters.
