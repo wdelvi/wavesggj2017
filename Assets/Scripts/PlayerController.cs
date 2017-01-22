@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed_h = 0.0f;	// horizontal speed
 	public float speed_h_in_wave = -3.0f;
-	public float speed_h_in_air = -4.0f;
-	public float speed_h_on_ground = -4.0f;
+	public float speed_h_in_air = -3.5f;
+	public float speed_h_on_ground = -3.5f;
 	public float speed_h_down_add = 5.0f;
 	public float speed_h_down_add_force = 2.0f;
 	public float speed_h_collide = -256.0f;
@@ -57,12 +57,12 @@ public class PlayerController : MonoBehaviour {
 		if (is_in_air)
 		{
 			speed_h = speed_h_in_air;
-			speed_h_acceleration += speed_h_jerk_up;
+			speed_h_acceleration = 0.0f;
 		}
 		else if (is_on_ground)
 		{
 			speed_h = speed_h_on_ground;
-			speed_h_acceleration += speed_h_jerk_up;
+			speed_h_acceleration = 0.0f;
 		}
 		else if (is_collide_now)
 		{

@@ -28,17 +28,18 @@ DONE
 	Nitiam sees first level without second overlapping.
 	Sound
 	Playtest with Marc.
+	Nitiam challenged but not overwhelmed.
+		David H challenged by ramp up of 6 levels.
+	Corey feels natural back and up.
+	Air and Ground does not slow down Marc so much.
 
 TODO
 
 	Nitiam and Marc recognize wave immediately.
 	Nitiam and Marc recognize surfer immediately.
 	Nitiam and Marc recognize surfer accelerate down and decelerate up.
-	Marc: Air and Ground does not slow down so much.
+	Marc hears ground sound.
 	Marc: Wave collider edge.
-	Nitiam challenged but not overwhelmed.
-		David H challenged by ramp up of 6 levels.
-	Playtest
 	Nitiam recognizes obstacles.
 	Playtest
 	David H quickly learns that press goes down.
@@ -49,7 +50,6 @@ TODO
 	Playtest
 	Submit
 	Playtest
-	Corey feels natural back and up.
 	Finger tap instruction
 		at wave
 	Playtest
@@ -57,6 +57,6 @@ TODO
 		Wave
 	Particle system
 	Playtest
-	Jump
+	Font
 	Music
 	Jumping Effect - No input while in air, but allow movement into space
