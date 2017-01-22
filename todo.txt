@@ -75,13 +75,14 @@ DONE
 
 TODO
 
+	Wave approaches as player slows down.
+		Blend distance and player world x.
+		Wave doesn't start at random place.
 	Nityam realizes bottom of screen is slower.
 	Nityam plays middle levels a little more difficult.
 	Polish wave crash sound as louder and longer.
 	Nityam sees first obstacles sooner.
 	Playtest
-	Wave approaches as player slows down.
-		Blend distance and player world x.
 	Remove deltaTime from horizontal speed calculation and compensate.
 	Playtest
 	Die:  Delay repeat instruction.

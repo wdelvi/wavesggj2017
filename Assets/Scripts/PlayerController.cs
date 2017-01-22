@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
 	public float force_multiplier = 200.0f;
 
 	public ParticleSystem particle;
+	public ParticleSystem particleOnGround;
 
 	// Use this for initialization
 	public void Setup() {
@@ -58,10 +59,11 @@ public class PlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 		particle.enableEmission = false;
+		particleOnGround.enableEmission = false;
 	}
 
 	private void UpdateAnimation() {
-		if (is_down) {
+		if (is_down && !is_on_ground) {
 			if (!anim.GetBool ("isDown")) {
 				anim.SetBool ("isDown", true);
 				particle.enableEmission = true;
@@ -192,6 +194,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void SetOnGround (bool _is_on_ground) {
 		is_on_ground = _is_on_ground;
+		particleOnGround.enableEmission = is_on_ground;
 	}
 
 	void OnCollisionEnter2D (Collision2D other) {
