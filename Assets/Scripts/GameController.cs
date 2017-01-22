@@ -40,6 +40,9 @@ public class GameController : MonoBehaviour
 	public float maxWaveLerpTime = 15.0f;
 	public float minWaveLerpTime = 5.0f;
 
+	public AudioClip gameMusic;
+	public AudioSource musicPlayer;
+
 	[SerializeField]
 	private LevelController levelController = new LevelController();
 	private bool gameActive = true;
@@ -290,6 +293,8 @@ public class GameController : MonoBehaviour
 			}
 			else
 			{
+				this.musicPlayer.clip = this.gameMusic;
+				this.musicPlayer.Play ();
 				this.UnpauseGame ();
 			}
 		}
