@@ -62,11 +62,11 @@ DONE
 	Polish wave crash:  wave covers screen.
 	Wave on top of all obstacles.
 	Z-sort player by vertical position every frame.
+	Host on GitHub or FineGameDesign.com
+	Build WebGL:  720x480.
 
 TODO
 
-	Build WebGL:  720x480.
-	Host on GitHub or FineGameDesign.com
 	Playtest WebGL.
 	Josh reads text.
 		Instruction above wave.
