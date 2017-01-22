@@ -105,6 +105,8 @@ public class LevelController
 			if (child.tag == "DefaultObstacle") {
 				Sprite newSprite = obstacleLibrary[(int)Mathf.Floor(Random.Range(0, obstacleLibrary.Count))];
 				child.Find ("Sprite").GetComponent<SpriteRenderer> ().sprite = newSprite;
+				child.localPosition = new Vector3(child.localPosition.x, child.localPosition.y, child.localPosition.y + 1);
+				Debug.Log (child.localPosition);
 			}
 		}
 
