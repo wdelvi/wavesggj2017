@@ -52,12 +52,12 @@ DONE
 	Polish particle
 	Josh playtests
 	Nitiam and Marc, Josh recognize surfer immediately.
+	Nitiam, Josh recognize Corey's barrel riders.
 
 TODO
 
 	Josh reads text.
 	Artwork
-	Nitiam, Josh recognizes obstacles.
 	Polish sounds
 	Playtest
 	Ramp up level difficulty for Tim and Josh.
@@ -65,6 +65,7 @@ TODO
 	Wave approaches as player slows down.
 	Jumping Effect - No input while in air, but allow movement into space for Will and Josh.
 	Submit
+	Z-sort by vertical position.
 	Finger tap instruction
 		at wave
 	Playtest
