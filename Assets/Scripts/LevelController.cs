@@ -14,23 +14,25 @@ public class LevelController
 	//All of our options starting shuffled and removing as used
 	public List<GameObject> levelChunkDeck;
 
-	//All of our options for obstacles
-	public List<Sprite> obstacleLibrary;
-
 	//The current chunks that are instantiated into the game
 	public List<GameObject> levelChunkHand;
 	public int handLength = 3;
 	public int handStep = 1;
 	public int handStart = -1;
 
+	private Sprite[] obstacles;
+
 	public void Setup () 
 	{
 		handStart = -1;
+		obstacles = Resources.LoadAll<Sprite> ("Obstacles");
+
 		this.levelChunkHand = new List<GameObject>();
 
 		this.ShuffleDeck ();
 
 		this.CreateInitialHand ();
+
 	}
 
 	public void Update () 
@@ -103,7 +105,7 @@ public class LevelController
 
 		foreach (Transform child in newLevelChunk.transform) {
 			if (child.tag == "Obstacle") {
-				Sprite newSprite = obstacleLibrary[(int)Mathf.Floor(Random.Range(0, obstacleLibrary.Count))];
+				Sprite newSprite = obstacles[(int)Mathf.Floor(Random.Range(0, obstacles.Length))];
 				child.Find ("Sprite").GetComponent<SpriteRenderer> ().sprite = newSprite;
 				child.localPosition = new Vector3(child.localPosition.x, child.localPosition.y, child.localPosition.y + 1);
 			}
