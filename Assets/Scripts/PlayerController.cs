@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
 
 	private float speed_v;			// vertical speed
 	private Rigidbody2D rb;
+	private Animator anim;
 
 	public bool is_down;
 	public bool is_down_before;
@@ -51,6 +52,19 @@ public class PlayerController : MonoBehaviour {
 		is_collide_now = false;
 		deltaTime = 0.0f;
 		rb = GetComponent<Rigidbody2D> ();
+		anim = GetComponent<Animator> ();
+	}
+
+	private void UpdateAnimation() {
+		if (is_down) {
+			if (!anim.GetBool ("isDown")) {
+				anim.SetBool ("isDown", true);
+			}
+		} else {
+			if (anim.GetBool ("isDown")) {
+				anim.SetBool ("isDown", false);
+			}
+		}
 	}
 
 	private void UpdateHorizontalSpeed() {
@@ -146,6 +160,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 		is_down_before = is_down;
+		UpdateAnimation ();
 	}
 
 	public void SetDead (bool _is_dead) {
