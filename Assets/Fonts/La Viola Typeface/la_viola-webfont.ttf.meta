@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 24df863caed454f0596b3131f642b2d4
+timeCreated: 1485056887
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: La Viola
+  fontNames:
+  - La Viola
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
