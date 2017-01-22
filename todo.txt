@@ -71,6 +71,7 @@ TODO
 	Josh reads text.
 		Instruction above wave.
 		Big distance HUD.
+	Adjust 2-space building collider.
 	Polish wave crash sound as louder and longer.
 	Playtest
 	Wave approaches as player slows down.

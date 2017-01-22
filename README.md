@@ -1,10 +1,14 @@
 # Surfing the Great Wave
 
-Play now:
+Play now from our website:
 
-[Android](./Release/surfingthegreatwave.apk)
+[Android](./play/surfingthegreatwave.apk)
 
-[WebGL](./Release/index.html)
+[WebGL](./play/webgl/index.html)
+
+Our website:
+
+[https://wdelvi.github.io/wavesggj2017/](https://wdelvi.github.io/wavesggj2017/)
 
 Engineers:  Will Delventhal, Ethan Kennerly, River Liu(sp?)
 
